@@ -1,0 +1,95 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="search-box2">
+        <input placeholder="请输入关键字" type="text" class="search-input2">
+    </div>
+    <a class="search-bar2">搜索</a>
+</header>
+{% endblock %}
+{% block content %}
+<article style="overflow-x: hidden; margin-top: 42px;">
+    <div class="service">
+        <h2>联系我们</h2>
+        <p>公司邮箱：shangwuxing2016@163.com</p>
+        <p>中国区办公室电话：0086-10-56207008（09:00-18:00）</p>
+        <p>中国区紧急联系电话：0086-15210006978</p>
+        <p>日本区紧急联系电话：0081-6-6262-1388（09:00-17:00）</p>
+        <!--<div>
+            <h2>微信公众号：尚五星海外购</h2>
+            <div class="img-wrap"><img src="images/wxgzh.png"></div>
+            <h2>客服人员微信号码：shangwuxing2016</h2>
+            <div class="img-wrap"><img src="images/wxkfry.png"></div>
+        </div>-->
+        <div class="tab-wrap">
+            <table>
+                <tr>
+                    <td width="40%" align="center"><span class="img-title">微信公众号：<br/>尚五星海外购</span></td>
+                    <td width="40%" align="center"><span class="img-title">客服人员微信号码：<br/>shangwuxing2016</span></td>
+                </tr>
+                <tr>
+                    <td align="center"><div class="img-wrap"><img id="wxgzh" src="/static/images/wxgzh.png"></div></td>
+                    <td align="center"><div class="img-wrap"><img id="wxkfry" src="/static/images/wxkfry.png"></div></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</article>
+{% endblock %}
+
+{% block footer %}
+<div id="go_top" class="go-top" onclick="javascript:scrollTo(0,0);"></div>
+{% endblock %}
+
+{% block script %}
+<script>
+    window.onscroll = function(){
+        var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+        var go_top = $G('go_top');
+        if(scroll > 5){
+            go_top.style.display = 'block';
+        } else {
+            go_top.style.display = 'none';
+        }
+    };
+
+    var time_wxgzh = 0;//初始化起始时间
+    $("#wxgzh").on('touchstart', function(e){
+        e.stopPropagation();
+        time_wxgzh = setTimeout(function(){
+            $("#wxkfry").css('display', 'none');
+            setTimeout(function () {
+                $("#wxkfry").css('display', '');
+//                alert(3)
+            }, 500);
+        }, 500);//这里设置长按响应时间
+    });
+    $("#wxgzh").on('touchend', function(e){
+        e.stopPropagation();
+        clearTimeout(time_wxgzh);
+    });
+
+    var time_wxkfry = 0;//初始化起始时间
+    $("#wxkfry").on('touchstart', function(e){
+        e.stopPropagation();
+        time_wxkfry = setTimeout(function(){
+            $("#wxgzh").css('display', 'none');
+            setTimeout(function () {
+                $("#wxgzh").css('display', '');
+//                alert(4)
+            }, 500);
+        }, 500);//这里设置长按响应时间
+    });
+    $("#wxkfry").on('touchend', function(e){
+        e.stopPropagation();
+        clearTimeout(time_wxkfry);
+    });
+</script>
+{% endblock %}

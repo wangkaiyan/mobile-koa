@@ -1,0 +1,104 @@
+{% set clazz = "cashier" %}
+{% set title = "收银台" %}
+{% extends './modules/common/templates/main.html' %}
+{% block style %}
+<style type="text/css">
+  .root-bg1{overflow: hidden;}
+  .root-mask1{position: fixed; z-index: 200; left: 0; top:0; right: 0; bottom: 0;width: 100%; height: 100%;
+    background: #000; filter: alpha(opacity=70); opacity: 0.7;}
+  .rm-com1{position: absolute; z-index: 1000;  top: 0; width: 100%; color: #fff;}
+  .rm-com11 img{margin: 40px auto 20px; display: block; width: 93%;}
+  .f01{text-align: center; line-height: 22px; font-size: 15px; margin-top: 10px;}
+</style>
+{% endblock %}
+{% block content %}
+  {% if !nested %}
+    <header class="bar bar-header">
+      {{ macro.back() }}
+      <h1 class="title">{{ title }}</h1>
+    </header>
+  {% endif %}
+  <section class="has-footer">
+    <div class="list compact">
+      <div class="item-divider"><span class="text-black">请选择支付方式</span></div>
+      <!-- 在线支付 -->
+
+      {% for item in payMethods %}
+        <label class="item">
+          <div class="avatar">
+            <img src="{{ item.icon }}" ui-mode="58px" />  
+          </div>
+          <span class="text">
+            {{ item.name }}
+            <div class="brief">{{ item.desc }}</div>
+          </span>
+          <input type="radio" ui-mode="checkbox" name="paytype" value="{{ item.type }}" {% if item.defaultFlag %}checked="checked"{% endif %} />
+        </label>
+      {% endfor %}
+    </div>
+  </section>
+
+
+<div id="rm01" dis0="0" style="display: none;" onclick="dis1()">
+  <div class="root-mask1"></div>
+  <div class="rm-com1">
+    <div class="rm-com11"><img src="/static/images/order_tip.png"></div>
+    <div>
+      <div class="f01">支付宝支付点这里<br/>选择在浏览器中打开，完成付款操作。</div>
+      <!--<div class="f01">跳转后操作TIPS：<br/>登录-订单中心-未付款订单-立即支付</div>-->
+    </div>
+  </div>
+</div>
+
+  <footer class="bar bar-footer bar-fixed bar-flat">
+    <div class="flexbox compact">
+      <div class="item">
+        <div class="hspace">应付金额：<span class="text-orange">{{ order.orderBase.payMoneyZh}}</span></div>
+      </div>
+      <div class="item">
+        {% if order.orderBase.payMoneyZh > 0 && !weixin %}
+         <!-- <button class="button warning square submit" data-code="{{ order.orderBase.orderNo }}">去支付</button>-->
+
+          <a class="button warning square" href="/cashier/alipay/{{order.orderBase.orderNo}}">去支付</a>
+        {% endif %}
+
+        {% if order.orderBase.payMoneyZh > 0 && weixin %}
+          <a class="button warning square"   href="#" onclick="dis1()" >去支付</a>
+        {% endif %}
+
+        {% if !order.orderBase.payMoneyZh > 0 %}
+          <a class="button warning square" href="/account/orders">返回订单</a>
+        {% endif %}
+      </div>
+    </div>
+  </footer>
+{% endblock %}
+{% block script %}
+
+<!--  <script src="{{ '/static/js/cashier.js'|version }}"></script>-->
+  <script>
+
+    function dis1() {
+      var rm = $('#rm01');
+      var dis0 = rm.attr('dis0');
+      if(dis0 == 0){
+        rm.css('display', '');
+        rm.attr('dis0', '1');
+        $(document.body).css('overflow', 'hidden');
+      } else {
+        rm.css('display', 'none');
+        rm.attr('dis0', '0');
+        $(document.body).css('overflow', '');
+      }
+    }
+
+
+    function a1() {
+      alert('请分享至浏览器中完成支付！');
+//        notice('请分享至浏览器中完成支付！')
+    }
+
+  </script>
+
+
+{% endblock %}

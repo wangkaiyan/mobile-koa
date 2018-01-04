@@ -1,0 +1,28 @@
+<html lang="zh-CN" data-whost="{{ whost }}">
+<head>
+  <meta charset="utf-8" />
+  <title>{{ title || '尚五星海外购'}}</title>
+  <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+  <meta content="yes" name="apple-touch-fullscreen" />
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="telephone=no" name="format-detection">
+  <meta content="email=no" name="format-detection">
+
+
+  <script src="{{ '/static/js/base.js'|version }}"></script>
+  <script src="{{ '/static/js/jquery.min.js'|version }}"></script>
+  <!--  <script src="{{ '/static/js/jquery-2.0.0.min.js'|version }}"></script>-->
+
+  <script src="{{ '/static/js/global2.js'|version }}"></script>
+  {% block style %}{% endblock %}
+</head>
+
+<body >
+{% block header %}{% endblock %}
+{% block content %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block script %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="search-box2">
+        <input  id="search-home-search2" placeholder="请输入关键字" type="text" class="search-input2">
+    </div>
+    <a class="search-bar2"  href="#" onclick="a()" >搜索</a>
+</header>
+{% endblock %}
+{% block content %}
+<article style="overflow-x: hidden; margin-top: 42px;">
+    <div class="products">
+        <ul>
+            {% for item in list %}
+            <li>
+                <div class="li-wrap">
+                    <a href="/shopping/videoDetail/{{item.id}}"><img src="{{item.imgs}}"></a>
+                    <div class="p-title">
+                        <strong class="p-title-s"><a>{{item.name}}</a></strong>
+                        <i class="p-title-i"><img src="/static/images/video0.png"></i>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</article>
+{% endblock %}
+
+{% block footer %}
+<div class="placeholder-bottom"></div>
+<footer class="footer">
+    <p class="b-box" onclick="goHome()"><i class="bx-title bx-title-1"></i><em class="bx-text">商城首页</em></p>
+    <p class="b-box" onclick="goShoppingCart()"><i class="bx-title bx-title-2"></i><em class="bx-text">购物车</em></p>
+    <p class="b-box" onclick="goLogin()"><i class="bx-title bx-title-3"></i><em class="bx-text">个人中心</em></p>
+    <p class="b-box" onclick="goShopList()"><i class="bx-title bx-title-4"></i><em class="bx-text">实体店铺</em></p>
+    <p class="b-box" onclick="goService()"><i class="bx-title bx-title-5"></i><em class="bx-text">联系客服</em></p>
+</footer>
+<div id="go_top" class="go-top" onclick="javascript:scrollTo(0,0);"></div>
+{% endblock %}
+
+{% block script %}
+<script>
+    window.onscroll = function(){
+        var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+        var go_top = $G('go_top');
+        if(scroll > 5){
+            go_top.style.display = 'block';
+        } else {
+            go_top.style.display = 'none';
+        }
+    };
+
+    function a() {
+        debugger
+//    alert($('input#search-home-search2').val());
+        var content = $('input#search-home-search2').val();
+        if(content == null || content == ''){
+            notice('搜索内容不能为空')
+        }else{
+            location.href = '/shopping/search?content=' + content;
+        }
+
+
+    }
+</script>
+{% endblock %}

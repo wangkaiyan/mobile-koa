@@ -1,0 +1,87 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+
+<header class="header" style="background: #64318A;">
+    <div class="back-btn" onclick="goBack()"></div>
+</header>
+
+{% endblock %}
+{% block content %}
+
+<section class="section">
+    <h1 class="login-header">会员登录</h1>
+    <div class="login-input-title">
+        <ul>
+            <li id="t_1" onclick="showA(1)" class="on">邮箱登录</li>
+            <li id="t_2" onclick="showA(2)">手机登录</li>
+        </ul>
+    </div>
+    {% if error %}
+    <div class="login-msg0">{{ error }}</div>
+    {% endif %}
+    <div id="c_1" class="login-input">
+        <form method="post" autocomplete="off">
+            <ul>
+                <li><input class="login-i1"  maxlength="30" required   name="email" placeholder="请输入邮箱"></li>
+                <li><input class="login-i2"  name="password"  maxlength="20" required  placeholder="请输入登录密码"></li>
+                <input type="hidden" name="type" value="2" />
+                <li>
+                    <button class="login-i3" >登录</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div id="c_2" style="display: none;" class="login-input">
+        <form method="post" autocomplete="off">
+            <ul>
+                <li><input pattern="[0-9]*"  maxlength="11" required   name="phone"  class="login-i1" placeholder="请输入手机号"></li>
+                <li><input  name="password" placeholder="请输入密码" maxlength="20" required></li>
+                <input type="hidden" name="type" value="1" />
+                <li>
+                    <button class="login-i3">登录</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div class="login-help">
+        <ul>
+            <li><a href="/account/register"><i class="login-help-r1"></i><em>注册账号</em></a></li>
+            <li><a href="/account/forgot"><i class="login-help-r2"></i><em>忘记密码</em></a></li>
+        </ul>
+    </div>
+</section>
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+    function showA(val) {
+        switch (val) {
+            case 1:
+                $G('t_1').className = 'on';
+                $G('t_2').className = '';
+
+                $G('c_1').style.display = 'block';
+                $G('c_2').style.display = 'none';
+                break;
+            case 2:
+                $G('t_1').className = '';
+                $G('t_2').className = 'on';
+
+                $G('c_1').style.display = 'none';
+                $G('c_2').style.display = 'block';
+                break;
+        }
+    }
+    function login() {
+        location.href = 'me.html';
+    }
+</script>
+{% endblock %}

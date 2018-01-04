@@ -1,0 +1,73 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="title-msg">下单用户</div>
+</header>
+{% endblock %}
+{% block content %}
+<article style="overflow-x: hidden; margin-top: 40px; background: #fff; width: 100%; height: 100%;">
+    <div class="leader-menu">
+        <ul>
+            <li class="noselect"><a class="lm-un-select" href="/account/leader">客户订单</a></li>
+            <li class="noselect"><a class="lm-un-select" href="/account/leader/hotel">酒店信息</a></li>
+            <li class="select"><a class="lm-select">下单用户</a></li>
+        </ul>
+    </div>
+    <div class="leader-content">
+        <div class="user-row">
+            <ul>
+                <li>序号</li>
+                <li class="f2">昵称</li>
+                <li class="f3">电话/邮箱</li>
+            </ul>
+        </div>
+        {% for user in users %}
+        <div class="user-row">
+            <ul>
+                <li>{{ loop.index }}</li>
+                <li class="f2">{{user.nickName}}</li>
+                {% if user.phone != null &&  user.phone !=  "" %}
+                <li class="f3">{{user.phone}} </li>
+                {% else %}
+                <li class="f3">{{user.email}} </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
+</article>
+{% endblock %}
+
+{% block footer %}
+<div class="placeholder-bottom"></div>
+<footer class="footer">
+    <p class="b-box" onclick="goHome()"><i class="bx-title bx-title-1"></i><em class="bx-text">商城首页</em></p>
+    <p class="b-box" onclick="goShoppingCart()"><i class="bx-title bx-title-2"></i><em class="bx-text">购物车</em></p>
+    <p class="b-box" onclick="goLogin()"><i class="bx-title bx-title-3"></i><em class="bx-text">个人中心</em></p>
+    <p class="b-box" onclick="goShopList()"><i class="bx-title bx-title-4"></i><em class="bx-text">实体店铺</em></p>
+    <p class="b-box" onclick="goService()"><i class="bx-title bx-title-5"></i><em class="bx-text">联系客服</em></p>
+</footer>
+<div id="go_top" class="go-top" onclick="javascript:scrollTo(0,0);"></div>
+{% endblock %}
+
+{% block script %}
+<script>
+    window.onscroll = function(){
+        var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+        var go_top = $G('go_top');
+        if(scroll > 5){
+            go_top.style.display = 'block';
+        } else {
+            go_top.style.display = 'none';
+        }
+    };
+</script>
+{% endblock %}

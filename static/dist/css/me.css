@@ -1,0 +1,79 @@
+/* 脚本提醒 */
+.js-notice { position: fixed; left: 0; bottom: 75px; height: 0; overflow: visible; text-align: center; width: 100%; z-index: 1001; font-size: 24px; }
+.js-notice span { display: inline-block; padding: 10px 25px; border-radius: 8px; color: #fff; background-color: rgba(0, 0, 0, 0.7); }
+.js-notice.overdue { opacity: 0; -webkit-animation-duration: 0.5s; animation-duration: 0.5s; -webkit-animation-name: fadeOut; animation-name: fadeOut; display: none; }
+
+
+/* 遮罩 */ /* 弹窗 */
+.mask-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  margin: 0 auto;
+  background-color: rgba(0,0,0,.5);
+  z-index: 1000;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+}
+.modal{
+  position: static;
+  width: 80%;
+  margin: auto;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  color: #000;
+}
+.footer1 {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  border-top: 1px solid #e5e5e5;
+  background-color: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+.title {
+  font-weight: 400;
+  font-size: 16px;
+  padding-top: 12px;
+  text-align: center;
+  font-family: "Helvetica Neue",Helvetica,STHeiTi,sans-serif;
+}
+.content {
+  padding: 8px 10px 8px;
+  font-size: 16px;
+  white-space: normal;
+  text-align: center;
+  font-family: "Helvetica Neue",Helvetica,STHeiTi,sans-serif;
+}
+.button-group {
+  margin-top: 0;
+  margin-bottom: 0;
+  display: flex;
+  width: 100%;
+}
+
+.button {
+  -webkit-box-flex: 1;
+  color: #0ae;
+  font-family: "Helvetica Neue",Helvetica,STHeiTi,sans-serif;
+  flex: 1;
+  display: block;
+  font-size: 16px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 0;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  text-decoration: none;
+  background-origin: border-box;
+  text-align: center;
+  background-color: transparent!important;
+  border: none!important;
+}

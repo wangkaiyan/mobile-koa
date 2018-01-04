@@ -1,0 +1,219 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+<!--<header class="header">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="title-msg">我的订单</div>
+    <a class="search-button" href="javascript:void(0)" onclick="toggleSearchMask()"></a>
+</header>-->
+<header class="header">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="search-box2"><input  id="search-home-search2" placeholder="请输入关键字" type="text" value="{{ content }}" class="search-input2"></div>
+    <a class="search-bar2" href="#" onclick="a()" >搜索  </a>
+</header>
+{% endblock %}
+{% block content %}
+<article style="overflow-x: hidden; margin-top: 40px; width: 100%; height: 100%;">
+ <!--   <div id="search-mask" class="search-mask" style="display: none; /*height: 50%; background: #f1f1f1; box-shadow:0px 50px 50px #F1F1F1;*/">
+        <header class="header">
+            <div class="logo11x">订单搜索</div>
+            <a class="search-button-x" href="javascript:void(0)" onclick="toggleSearchMask()"></a>
+        </header>
+        <div class="search-box-wrap">
+            <div class="search-box-x" style="background: #fff;"><input placeholder="搜索全部订单" type="text" class="search-input-x"></div>
+            <a class="search-bar-x" href="me_orders.html">搜索</a>
+        </div>
+        <div class="rate-wap"></div>
+
+    </div>-->
+    <div class="d-ul-menu" data-type="{{type}}">
+        <ul>
+            <li><a  {% if type == null %} class="on" {% endif %}  href="/account/orders" >全部</a></li>
+            <li><a  {% if type == 1 %} class="on" {% endif %}  href="/account/orders?type=1" >待付款</a></li>
+            <li><a  {% if type == 2 %} class="on" {% endif %}  href="/account/orders?type=2">待发货</a></li>
+            <li><a  {% if type == 3 %} class="on" {% endif %}  href="/account/orders?type=3">待收货</a></li>
+            <li><a  {% if type == 4 %} class="on" {% endif %}  href="/account/orders?type=4">已完成</a></li>
+        </ul>
+    </div>
+
+
+    <div id="orders">
+    {% for item in orders.list %}
+    <div class="box-1" style="margin-top: 0;">
+        <div class="box-1-wrap">
+            <div class="b1w-status">{{item.orderBase.status|orderStatusFilter}}</div>
+            <div class="b1w-content">
+                <dl>
+
+                {% if item.orderSubs.length == 1 %}
+                    <dt>
+                        <a href="/shopping/details/{{item.orderSubs[0].productId}}"><img src="{{item.orderSubs[0].productImg}}"></a>
+                    </dt>
+                    <dd>
+                        <ul>
+                            <li><a href="/shopping/details/{{item.orderSubs[0].productId}}">{{item.orderSubs[0].productName}}</a></li>
+                            <li>{{item.orderSubs[0].productNameJp}}</li>
+                        </ul>
+                    </dd>
+                {% else %}
+                    <dt>
+                        {% for orderSub in item.orderSubs %}
+                        <a href="/shopping/details/{{orderSub.productId}}"><img src="{{orderSub.productImg}}"></a>
+                        {% endfor %}
+                    </dt>
+                {% endif %}
+                </dl>
+            </div>
+            <div class="b1w-btn">
+                {% if item.orderBase.status == 0 || item.orderBase.status == 7  %}
+                <a class="btn-edit2 remove_order" data-code="{{ item.orderBase.orderNo }}">删除</a>
+                {% endif %}
+
+                {% if item.orderBase.status == 1 %}
+                <a class="btn-edit2" href="/cashier/payment?code={{item.orderBase.orderNo}}" >去支付</a>
+                <a class="btn-edit2 cancel_order" data-code="{{ item.orderBase.orderNo }}">取消</a>
+                {% endif %}
+
+               <!-- {% if  item.orderBase.status == 3 %}
+                <a class="btn-edit2 sign_order"  data-code="{{ item.orderBase.orderNo }}">去签收</a>
+                {% endif %}-->
+
+
+                {% if item.orderBase.status == 4 && item.orderBase.evaluateStatus == 0 %}
+                <a class="btn-edit2" href="/shopping/evaluate/{{ item.orderBase.orderNo }}" data-code="{{ item.orderBase.orderNo }}">评价</a>
+                {% endif %}
+
+
+                <a class="btn-edit" href="/shopping/order/{{item.orderBase.orderNo}}">查看详情</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+
+
+    <!--<div class="box-1">
+        <div class="box-1-wrap">
+            <div class="b1w-status">待支付</div>
+            <div class="b1w-content">
+                <dl>
+                    <dt>
+                        <img src="images/product3.jpg">
+                        <img src="images/product3.jpg">
+                        <img src="images/product3.jpg">
+                        <img src="images/product3.jpg">
+                        <img src="images/product3.jpg">
+                        <img src="images/product3.jpg">
+                    </dt>
+                </dl>
+            </div>
+            <div class="b1w-btn">
+                <a class="btn-edit2" href="me_order_ensure.html">去支付</a><a class="btn-edit" href="me_orders_detail.html">查看详情</a>
+            </div>
+        </div>
+    </div>-->
+</article>
+
+{% raw %}
+<script id="ordersTempl" type="text/swig-template">
+    {% for item  in list %}
+    <div class="box-1" style="margin-top: 0;">
+        <div class="box-1-wrap">
+            <div class="b1w-status">{{item.orderBase.status|orderStatusFilter2}}</div>
+            <div class="b1w-content">
+                <dl>
+
+                    {% if item.orderSubs.length == 1 %}
+                    <dt>
+                        <img src="{{item.orderSubs[0].productImg}}">
+                    </dt>
+                    <dd>
+                        <ul>
+                            <li>{{item.orderSubs[0].productName}}</li>
+                            <li>{{item.orderSubs[0].productNameJp}}</li>
+                        </ul>
+                    </dd>
+                    {% else %}
+                    <dt>
+                        {% for orderSub in item.orderSubs %}
+                        <img src="{{orderSub.productImg}}">
+                        {% endfor %}
+                    </dt>
+                    {% endif %}
+                </dl>
+            </div>
+            <div class="b1w-btn">
+                {% if item.orderBase.status == 0 || item.orderBase.status == 7  %}
+                <a class="btn-edit2 remove_order" data-code="{{ item.orderBase.orderNo }}">删除</a>
+                {% endif %}
+
+                {% if item.orderBase.status == 1 %}
+                <a class="btn-edit2" href="/cashier/payment?code={{item.orderBase.orderNo}}" >去支付</a>
+                <a class="btn-edit2 cancel_order" data-code="{{ item.orderBase.orderNo }}">取消</a>
+                {% endif %}
+
+                {% if  item.orderBase.status == 3 %}
+                <a class="btn-edit2 sign_order"  data-code="{{ item.orderBase.orderNo }}">去签收</a>
+                {% endif %}
+
+
+                {% if item.orderBase.status == 4 && item.orderBase.evaluateStatus == 0 %}
+                <a class="btn-edit2" href="/shopping/evaluate/{{ item.orderBase.orderNo }}" data-code="{{ item.orderBase.orderNo }}">评价</a>
+                {% endif %}
+
+
+                <a class="btn-edit" href="/shopping/order/{{item.orderBase.orderNo}}">查看详情</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</script>
+{% endraw %}
+{% endblock %}
+
+{% block footer %}
+
+
+{% endblock %}
+
+{% block script %}
+
+<script src="{{ '/static/js/orders.js'|version }}"></script>
+<script type="text/javascript">
+    var status = 0;
+    function toggleSearchMask() {
+        if(status == 0){
+            $('#search\\-mask').css('display', 'block');
+            $('body').addClass('overflowx');
+        } else {
+            $('#search\\-mask').css('display', 'none');
+            $('body').removeClass('overflowx');
+        }
+        status = Math.abs(status - 1);
+    }
+
+
+
+    function a() {
+        debugger
+//    alert($('input#search-home-search2').val());
+        var content = $('input#search-home-search2').val();
+        if(content == null || content == ''){
+//            notice('搜索内容不能为空')
+            location.href = '/account/searchOrders';
+        }else{
+            location.href = '/account/searchOrders?content=' + content;
+        }
+
+
+    }
+
+
+</script>
+{% endblock %}
+

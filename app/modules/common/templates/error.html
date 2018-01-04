@@ -1,0 +1,21 @@
+{% set clazz = 'white error' %}
+{% set title = "服务器异常" %}
+{% extends './modules/common/templates/main.html' %}
+{% block content %}
+  {% if !nested %}
+    <header class="bar bar-header">
+      {{ macro.back() }}
+      <h1 class="title">{{ title }}</h1>
+    </header>
+  {% endif %}
+  <section>
+    <div class="plate">
+      <div class="draw">
+        <img src="http://7xjyap.com2.z0.glb.qiniucdn.com/image-c8b8f236-24f1-4859-9e6b-02fb65d4e87a.png" alt="默认" />
+        <h4 class="title">{{ error_status|default(500) }}</h4>
+        <div class="brief">{{ error_message|default('服务器失恋了，正在角落哭泣中...') }}</div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+{% block script %}{% endblock %}

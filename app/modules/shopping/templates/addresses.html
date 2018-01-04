@@ -1,0 +1,53 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+  <div class="back-btn" onclick="goBack()"></div>
+  <div class="title-msg">我的收货地址</div>
+</header>
+{% endblock %}
+{% block content %}
+<article style="overflow-x: hidden; margin-top: 42px; width: 100%;">
+
+  {% for address in list %}
+  <div class="address-row" data-id="{{ address.id }}">
+    <dl>
+
+          <dt class="ar-line">收货人：{{address.userName}} <span>{{address.phone}}
+                    <a class="arl-pic"><img src="/static/images/right2.png"></a></span></dt>
+          <dd class="ar-line">{{address.address}}</dd>
+          <dd class="at-btn">
+         </dd>
+        <div class="b1w-btn">
+            <a class="btn-edit2" href="/shopping/address/choose/{{ address.id }}">选择</a>
+        </div>
+
+    </dl>
+  </div>
+  {% endfor %}
+  <a class="btn-new" href="/shopping/address">新建</a>
+</article>
+{% endblock %}
+
+{% block footer %}
+<div id="go_top" class="go-top" onclick="javascript:scrollTo(0,0);"></div>
+{% endblock %}
+
+{% block script %}
+<script>
+  window.onscroll = function(){
+    var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+    var go_top = $G('go_top');
+    if(scroll > 5){
+      go_top.style.display = 'block';
+    } else {
+      go_top.style.display = 'none';
+    }
+  };
+</script>
+{% endblock %}

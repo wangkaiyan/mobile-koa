@@ -1,0 +1,146 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<!--<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>-->
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="title-msg">商品详情 </div>
+</header>
+
+{% endblock %}
+{% block content %}
+
+<article style="overflow-x: hidden; margin-top: 42px;">
+    <div class="slider">
+        <ul>
+        {% for item in goods.product.imgs %}
+        <li><img src="{{item}}"></li>
+        {% endfor %}
+        </ul>
+    </div>
+
+    <div class="product-msg">
+        <i>{{goods.product.name}}</i>
+        <em>￥{{goods.product.priceCh}}元&nbsp;&nbsp;円{{goods.product.price}}</em>
+        {%  if member.userType ===  2 %}
+        <em style='color:#FF0000' >￥{{goods.product.leaderPriceCh}}元&nbsp;&nbsp;円{{goods.product.leaderPrice}}(领队价)</em>
+        {% endif %}
+        <span>库存：{{goods.product.stock}}</span>
+        <h1>商户名称：<a>{{goods.shop.name}}</a></h1>
+        <span class="product-add-shopping-cart-wrap">
+            <a class="product-add-shopping-cart"  data-cart="true" >加入购物车</a>
+        </span>
+    </div>
+    <div>
+        <div class="product-list-title">
+            <ul>
+                <li id="t_1" onclick="showA(1)" class="on">商品介绍</li>
+                <li id="t_2" onclick="showA(2)">提货指南</li>
+                <li id="t_3" onclick="showA(3)">用户评论</li>
+            </ul>
+        </div>
+        <div id="c_1" class="product-list-content">
+            <ul class="plc-line1">
+                <li class="plcl-title-wrap"><span class="plcl-title">商品规格</span></li>
+                <li>中文名称：<i>{{goods.product.name}}</i></li>
+                <li>日文名称：<i>{{goods.product.nameJp}}</i></li>
+                <li>重量：<i>{{goods.product.weight}}</i></li>
+                <li>编号：<i>{{goods.product.productNo}}</i></li>
+                <li>产地：<i>{{goods.product.place}}</i></li>
+                <li>条形码：<i>{{goods.product.barcode}}</i></li>
+            </ul>
+            <div class="plcl-title-wrap mleft"><span class="plcl-title">商品详情</span></div>
+            {{goods.product.description|safe}}
+        </div>
+        <div id="c_2" style="display: none;" class="product-list-content">
+            <img src="/static/images/buy_notice.jpg">
+        </div>
+        <div id="c_3" style="display: none;" class="product-list-content bg-base">
+            {% for comment in goods.comments%}
+            <dl class="plc-row">
+                <dt>
+
+                    {% if comment.picturePath == null || comment.picturePath == '' %}
+                       <img src="/static/images/qq1.png">
+                    {% else %}
+                        <img src="{{comment.picturePath}}">
+                    {% endif %}
+                    <i>{{comment.nickName}}</i>
+                    <span class="fr">{{comment.createAt|date('Y-m-d H:i:s')}}</span>
+                </dt>
+                <dd>{{comment.content}}</dd>
+            </dl>
+            {% endfor %}
+        </div>
+    </div>
+</article>
+{% endblock %}
+
+
+{% block footer %}
+<div class="placeholder-bottom"></div>
+<footer class="footer">
+    <p class="b-box" onclick="goHome()"><i class="bx-title bx-title-1"></i><em class="bx-text">商城首页</em></p>
+    <p class="b-box" onclick="goShoppingCart()"><i class="bx-title bx-title-2"></i><em class="bx-text">购物车</em></p>
+    <p class="b-box" onclick="goLogin()"><i class="bx-title bx-title-3"></i><em class="bx-text">个人中心</em></p>
+    <p class="b-box" onclick="goShopList()"><i class="bx-title bx-title-4"></i><em class="bx-text">实体店铺</em></p>
+    <p class="b-box" onclick="goService()"><i class="bx-title bx-title-5"></i><em class="bx-text">联系客服</em></p>
+</footer>
+<div id="go_top" class="go-top" onclick="javascript:scrollTo(0,0);"></div>
+
+{% endblock %}
+
+
+{% block script %}
+
+<!--<script type="text/javascript" src="/static/js/yxMobileSlider.js"></script>-->
+<script src="{{ '/static/js/shopping.js'|version }}"></script>
+<script src="{{ '/static/js/my2.js'|version }}"></script>
+
+<script>
+    window.onscroll = function(){
+        var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+        var go_top = $G('go_top');
+        if(scroll > 5){
+            go_top.style.display = 'block';
+        } else {
+            go_top.style.display = 'none';
+        }
+    };
+    function showA(val) {
+        switch (val){
+            case 1:
+                $G('t_1').className = 'on';
+                $G('t_2').className = '';
+                $G('t_3').className = '';
+
+                $G('c_1').style.display = 'block';
+                $G('c_2').style.display = 'none';
+                $G('c_3').style.display = 'none';
+                break;
+            case 2:
+                $G('t_1').className = '';
+                $G('t_2').className = 'on';
+                $G('t_3').className = '';
+
+                $G('c_1').style.display = 'none';
+                $G('c_2').style.display = 'block';
+                $G('c_3').style.display = 'none';
+                break;
+            case 3:
+                $G('t_1').className = '';
+                $G('t_2').className = '';
+                $G('t_3').className = 'on';
+
+                $G('c_1').style.display = 'none';
+                $G('c_2').style.display = 'none';
+                $G('c_3').style.display = 'block';
+                break;
+        }
+    }
+</script>
+{% endblock %}

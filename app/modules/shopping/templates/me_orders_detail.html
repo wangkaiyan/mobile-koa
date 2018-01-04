@@ -1,0 +1,91 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="title-msg">订单详情</div>
+</header>
+{% endblock %}
+{% block content %}
+<article style="overflow-x: hidden; margin-top: 40px; width: 100%; height: 100%;">
+    <div class="od-row1">订单状态：<span>{{orderBase.status|orderStatusFilter}}</span></div>
+    <div class="od-row2">买家留言：{{orderBase.userMessage}}</div>
+
+    <div class="box-1">
+        <div class="box-1-wrap">
+            {% for orderSub in orderSubs %}
+            <div class="b1w-content">
+                <dl>
+                    <dt><img src="{{orderSub.productImg}}"></dt>
+                    <dd>
+                        <ul>
+                            <li>{{orderSub.productName}}</li>
+                            <li>价格：{{orderSub.totalPrice}}日元&nbsp;&nbsp;数量：{{orderSub.count}}件</li>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="od-row2">运费：{{orderBase.expressFee}}日元</div>
+    <div class="od-row2">
+        <div class="od-row3">总价<span>{{orderBase.totalPrice}}日元</span></div>
+        <div class="od-row3">优惠券<span>-{{orderBase.totalDiscount}}日元</span></div>
+        {% if orderBase.status ===  0  ||  orderBase.status === 7  ||  orderBase.status === 6 %}
+        <div class="od-row4">应付金额<span>{{orderBase.payMoneyZh}}人民币</span></div>
+        {% else %}
+        <div class="od-row4">实付金额<span>{{orderBase.payMoneyZh}}人民币</span></div>
+        {% endif %}
+
+    </div>
+
+    <div class="od-row2">
+        {% if orderBase.teamCode !=  null  &&  orderBase.teamCode !=  0 %}
+        <div class="od-row3">团号：{{orderBase.teamCode}}</div>
+        {% endif %}
+        <div class="od-row3">收货人：{{orderReceiver.receiverName}}</div>
+        <div class="od-row3">收货人电话：{{orderReceiver.receiverPhone}}</div>
+        <div class="od-row3">收货地址：{{orderReceiver.receiverAddress}}</div>
+    </div>
+
+    <div class="od-row2">
+        <div class="od-row3">订单编号：{{orderBase.orderNo}}</div>
+        <div class="od-row4">下单时间：{{orderBase.createAt|date('Y-m-d H:i:s')}}</div>
+    </div>
+    <div class="od-row2">
+        <div class="od-row4">订单跟踪：</div>
+        <div class="user-row">
+            <ul>
+                <li>时间</li>
+                <li>操作</li>
+            </ul>
+        </div>
+
+        {% for orderlog in orderLogs %}
+        <div class="user-row">
+            <ul>
+                <li>{{orderlog.createAt|date('Y-m-d H:i:s')}}</li>
+                <li>{{orderlog.remark}}</li>
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
+
+</article>
+{% endblock %}
+
+{% block footer %}
+
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

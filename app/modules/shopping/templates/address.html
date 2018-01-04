@@ -1,0 +1,146 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+{% block header %}
+<header class="header">
+  <div class="back-btn" onclick="goBack()"></div>
+  <div class="title-msg">新建收货地址</div>
+</header>
+{% endblock %}
+{% block content %}
+<form name="address" action="/shopping/address" method="post">
+  <article style="overflow-x: hidden; margin-top: 42px; width: 100%;">
+    <div class="address-wrap">
+      <div class="address-n">
+        <dl>
+          <dt class="an-line">姓名</dt>
+          <dd class="an-line">
+            <!--                    <input class="input-line" type="text" placeholder="收货人姓名">-->
+            <input type="text" class="input-line" name="userName" placeholder="收货人姓名" value="{{ userName }}" maxlength="20" required />
+          </dd>
+        </dl>
+      </div>
+      <div class="address-n">
+        <dl>
+          <dt class="an-line">手机</dt>
+          <dd class="an-line">
+            <!-- <input class="input-line" type="text" placeholder="收货人手机号">-->
+            <input type="tel" pattern="[0-9]*" class="input-line" name="phone" placeholder="手机号码" maxlength="11" value="{{ phone }}" required />
+          </dd>
+        </dl>
+      </div>
+      <div class="address-n">
+        <dl>
+          <dt class="an-line">地址</dt>
+          <dd class="an-line">
+            <select id="country" name="country" class="leader-content-select2" onchange="changeCity(this)">
+              <option value="日本">日本</option>
+              <option value="中国">中国</option>
+            </select>
+            <input type="hidden" name="province"  />
+            <select  class="leader-content-select2" id="cityJP">
+              <option value="">请选择城市</option>
+              <option value="东海">东海</option>
+              <option value="信越">信越</option>
+              <option value="北海道">北海道</option>
+              <option value="九州">九州</option>
+              <option value="关西">关西</option>
+              <option value="关东">关东</option>
+            </select>
+            <select  class="leader-content-select2" id="cityZH" style="display: none;">
+              <option value="">请选择城市</option>
+              <option value="北京">北京</option>
+              <option value="上海">上海</option>
+              <option value="重庆">重庆</option>
+              <option value="安徽">安徽</option>
+              <option value="福建">福建</option>
+              <option value="甘肃">甘肃</option>
+              <option value="广东">广东</option>
+              <option value="广西">广西</option>
+              <option value="贵州">贵州</option>
+              <option value="海南">海南</option>
+              <option value="河北">河北</option>
+              <option value="黑龙江">黑龙江</option>
+              <option value="河南">河南</option>
+              <option value="香港">香港</option>
+              <option value="湖北">湖北</option>
+              <option value="湖南">湖南</option>
+              <option value="江苏">江苏</option>
+              <option value="江西">江西</option>
+              <option value="吉林">吉林</option>
+              <option value="辽宁">辽宁</option>
+              <option value="澳门">澳门</option>
+              <option value="内蒙古">内蒙古</option>
+              <option value="宁夏">宁夏</option>
+              <option value="青海">青海</option>
+              <option value="山东">山东</option>
+              <option value="山西">山西</option>
+              <option value="陕西">陕西</option>
+              <option value="四川">四川</option>
+              <option value="台湾">台湾</option>
+              <option value="天津">天津</option>
+              <option value="新疆">新疆</option>
+              <option value="西藏">西藏</option>
+              <option value="云南">云南</option>
+              <option value="浙江">浙江</option>
+            </select>
+          </dd>
+        </dl>
+      </div>
+      <div class="address-n">
+        <textarea placeholder="请输入您的详细地址" type="text" name="address" maxlength="100" required>{{ address }}</textarea>
+      </div>
+    </div>
+    <!-- <a class="btn-new">保存地址</a>-->
+    <input type="hidden" name="id" value="{{ id }}" />
+    <button class="button warning square">保存地址</button>
+  </article>
+</form>
+{% endblock %}
+
+{% block footer %}
+<div id="go_top" class="go-top" onclick="javascript:scrollTo(0,0);"></div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ '/static/js/address.js'|version }}"></script>
+<script>
+window.onscroll = function(){
+var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+var go_top = $G('go_top');
+if(scroll > 5){
+go_top.style.display = 'block';
+} else {
+go_top.style.display = 'none';
+}
+};
+
+if( '{{country}}' != '' ) {
+  $("#country option[value='{{ country }}']").attr("selected", 'selected');
+}
+if('{{country}}' == '日本' ) {
+  $("#cityJP option[value='{{ province }}']").attr("selected", 'selected');
+}
+if('{{country}}' == '中国' ) {
+  $("#cityZH option[value='{{ province }}']").attr("selected", 'selected');
+}
+
+
+function changeCity(obj) {
+  var val = $(obj).val();
+  if(val == '日本'){
+    $("#cityJP").css("display", "");
+    $("#cityZH").css("display", "none");
+  } else {
+    $("#cityJP").css("display", "none");
+    $("#cityZH").css("display", "");
+  }
+  /*  $("#cityJP option:eq(0)").attr("selected",'selected');
+   $("#cityZH option:eq(0)").attr("selected",'selected');*/
+}
+
+</script>
+{% endblock %}

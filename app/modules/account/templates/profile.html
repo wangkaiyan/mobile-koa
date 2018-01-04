@@ -1,0 +1,123 @@
+{% set clazz = "profile" %}
+{% set title = "我的" %}
+{% extends './modules/common/templates/main.html' %}
+{% block style %}
+  <link rel="stylesheet" type="text/css" href="{{ '/static/css/profile.css'|version }}" />
+{% endblock %}
+{% block content %}
+  {% if !nested %}
+    <header class="bar bar-header">
+      {{ macro.back() }}
+      <h1 class="title">{{ title }}</h1>
+    </header>
+  {% endif %}
+  <section class="has-footer">
+    <a class="figure text-center" href="/account/settings">
+      <div class="vague">
+        <img class="center-block" src="{{ member.memberAvatar }}" />
+      </div>
+      <div class="avatar">
+        <img class="center-block" src="{{ member.memberAvatar|figure|thumb(150, 150) }}" />
+      </div>
+      {% if member && member.memberId %}
+        <h3 class="text-sm">{{ member.memberName || member.memberId  }}</h3>
+        <i class="icon text-white">&#xe61a;</i>
+      {% else %}
+        <h3 class="text-sm">尚未登录，点此登录</h3>
+      {% endif %}
+    </a>
+    <div class="list compact">
+      <a class="item" href="/wallet">
+        <div class="avatar">
+          <img src="http://7xjyap.com2.z0.glb.qiniucdn.com/image-4e820acc-09a5-41df-952d-67ad09c69f5b.png" ui-mode="32px" />
+        </div>
+        <span class="text">我的钱包</span>
+        {% if wallet.slogan.length && !ua.weixin %}
+          <span class="extra"><span class="text-orange">{{ wallet.slogan[0] }}</span></span>
+        {% endif %}
+        <i class="icon text-gray">&#xe61a;</i>
+      </a>
+    </div>
+    {% if wallet %}
+      <div class="flexbox menus">
+        <a class="item" href="/wallet/records">
+          <span class="center-block">{{ wallet.account.availableAmount|currency(2, '') }}</span>
+          <span class="center-block">账户余额</span>
+        </a>
+        <a class="item" href="/integral">
+          <span class="center-block">{{ wallet.accountIntegral }}</span>
+          <span class="center-block">我的积分</span>
+        </a>
+        <a class="item" href="/account/coupons">
+          <span class="center-block">{{ wallet.accountQdTicket|currency(0) }}</span>
+          <span class="center-block">券</span>
+        </a>
+      </div>
+    {% endif %}
+
+    <div class="list">
+      <a class="item" href="/location">
+        <i class="icon">&#xe62a;</i>
+        <span class="text">我的社区</span>
+        <span class="extra">{{ project.name }}</span>
+        <i class="icon text-gray">&#xe61a;</i>
+      </a>
+    </div>
+    
+    <div class="list">
+      <a class="item" href="/account/orders">
+        <div class="avatar">
+          <img src="http://7xjyap.com2.z0.glb.qiniucdn.com/image-3baaf2d1-f569-47b9-b264-db8ffab63392.png" ui-mode="32px" />
+        </div>
+        <span class="text">我的订单</span>
+        <i class="icon text-gray">&#xe61a;</i>
+      </a>
+      <a class="item" href="/account/addresses">
+        <div class="avatar">
+          <img src="http://7xjyap.com2.z0.glb.qiniucdn.com/image-0fc9fb99-fcc3-41f0-aa6b-1fff1696f593.png" ui-mode="32px" />
+        </div>
+        <span class="text">收货地址</span>
+        <i class="icon text-gray">&#xe61a;</i>
+      </a>
+      <a class="item" href="/shopping/cart">
+        <div class="avatar">
+          <img src="http://7xjyap.com2.z0.glb.qiniucdn.com/image-96ac3587-9348-4e25-b288-2c036459865c.png" ui-mode="32px" />
+        </div>
+        <span class="text">我的购物车</span>
+        <i class="icon text-gray">&#xe61a;</i>
+      </a>
+    </div>
+    <div class="list">
+      <a class="item" href="/lottery/records">
+        <div class="avatar">
+          <img src="http://7xjyap.com2.z0.glb.qiniucdn.com/image-74797c93-94c5-44ec-bd09-1653a19d36b9.png" ui-mode="32px" />
+        </div>
+        <span class="text">我的夺宝</span>
+        <i class="icon text-gray">&#xe61a;</i>
+      </a>
+    </div>
+    <div class="list">
+      <a class="item" href="/account/remind">
+        <i class="icon">&#xe617;</i>
+        <span class="text">消息中心</span>
+        <i class="icon text-gray">&#xe61a;</i>
+      </a>
+      <a class="item" href="tel:{% if longhu %}400-708-0080{% else %}400-081-8181{% endif %}">
+        <div class="avatar">
+          <img src="http://7xjyap.com2.z0.glb.qiniucdn.com/image-940eb384-afda-46e0-8ec5-0e7bb37d4a82.png" ui-mode="32px" />
+        </div>
+        <span class="text">客服热线</span>
+        <span class="text text-right">{% if longhu %}400-708-0080{% else %}400-081-8181{% endif %}</span>
+        <i class="icon text-gray">&#xe61a;</i>
+      </a>
+      <!-- <a class="item" href="/account/general.html">
+        <div class="avatar">
+          <img src="http://7xjyap.com2.z0.glb.qiniucdn.com/image-1c3ef12f-1b44-416d-b695-39c4efccb4e5.png" ui-mode="32px" />
+        </div>
+        <span class="text">通用设置</span>
+        <i class="icon text-gray">&#xe61a;</i>
+      </a> -->
+    </div>
+  </section>
+  {{ macro.footbar('profile') }}
+{% endblock %}

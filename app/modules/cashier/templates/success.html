@@ -1,0 +1,44 @@
+{% set clazz = "success" %}
+{% set title = "支付成功" %}
+{% extends './modules/common/templates/main.html' %}
+{% block content %}
+  {% if !nested %}
+    <header class="bar bar-header">
+      {{ macro.back() }}
+      <h1 class="title">{{ title }}</h1>
+    </header>
+  {% endif %}
+  <section class="has-footer">
+    <div class="vspace inset text-center bg-white" ui-mode="30px">
+      <!--<img class="center-block" style="width: 4.53125rem;height: 5.625rem;"
+           src="http://7xjyap.com2.z0.glb.qiniucdn.com/image-eb5ea7e3-a383-4a2d-9e3f-533307b65320.png" />-->
+        <p class="vspace">支付成功啦 <i class="icon text-orange">&#xe600;</i></p>
+    </div>
+    <div class="list">
+    <!--  <div class="item">
+        <span class="text">
+          {{ entity.orderDelivery.receiveUserName || entity.orderBase.memberName }}
+          <span class="pull-right"><i class="icon">&#xe628;</i>{{ entity.orderDelivery.receiveUserPhone || entity.orderBase.memberMobile }}</span>
+        </span>
+      </div>-->
+      <div class="item">
+        <span class="text">订单编号：{{ orderBase.orderNo }}</span>
+      </div>
+     <!-- <div class="item">
+        <span class="text">支付方式：{{ entity.orderBase.paymentType|payType }}</span>
+      </div>-->
+      <div class="item">
+        <span class="text">支付金额：<span class="text-orange">{{ orderBase.payMoneyZh}}</span></span>
+      </div>
+    </div>
+      <div class="vspace hspace">
+        <div class="button-group">
+          <a class="button warning light" href="/account/orders">返回订单</a>
+        </div>
+      </div>
+  </section>
+{% endblock %}
+{% block script %}
+  {% parent %}
+  <script src="{{ '/static/js/cashier.js'|version }}"></script>
+{% endblock %}

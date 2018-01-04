@@ -1,0 +1,106 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+
+<header class="header" style="background-color: #64318A;">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="title-msg">个人中心</div>
+</header>
+
+{% endblock %}
+{% block content %}
+<article style="overflow-x: hidden; margin-top: 40px; background: #fff; width: 100%; height: 100%;">
+    <div>
+        <div class="pr-title" style="background-color: #64318A;">
+            <div class="prt-line0">
+                <a><img src="{{user.picturePath}}"></a>
+                <!--<span>普通用户</span>-->
+            </div>
+            <a class="prt-line1" href="/account/settings">
+                <img src="/static/images/right.png"></a>
+        </div>
+        <div class="prt-menu">
+            <div class="prt-line">
+                <img src="/static/images/b1.png">
+                <a class="prt-line-1" href="/account/orders">我的订单</a>
+                <a class="prt-line-2" href="/account/orders">
+                    <img src="/static/images/right2.png">
+                </a>
+            </div>
+            <div class="prt-line">
+                <img src="/static/images/b2.png">
+                <a class="prt-line-1" href="/account/addresses">收货地址</a>
+                <a class="prt-line-2" href="/account/addresses">
+                    <img src="/static/images/right2.png">
+                </a>
+            </div>
+            <div class="prt-line">
+                <img src="/static/images/b3.png">
+                <a class="prt-line-1" href="/shopping/cart">我的购物车</a>
+                <a class="prt-line-2" href="/shopping/cart">
+                    <img src="/static/images/right2.png">
+                </a>
+            </div>
+            <div class="prt-line">
+                <img src="/static/images/b4.png">
+                <a class="prt-line-1" href="/shopping/coupon">代金券</a>
+                <a class="prt-line-2" href="/shopping/coupon">
+                    <img src="/static/images/right2.png">
+                </a>
+            </div>
+            {%  if member.userType ===  2 %}
+            <div class="prt-line">
+                <img src="/static/images/b5.png">
+                <a class="prt-line-1" href="/account/leader">领队服务</a>
+                <a class="prt-line-2" href="/account/leader">
+                    <img src="/static/images/right2.png">
+                </a>
+            </div>
+            {% endif %}
+
+            <div class="prt-line">
+                <img src="/static/images/b6.png">
+                <a class="prt-line-1" href="/shopping/help">购买帮助</a>
+                <a class="prt-line-2" href="/shopping/help">
+                    <img src="/static/images/right2.png">
+                </a>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+{% endblock %}
+
+{% block footer %}
+<div class="placeholder-bottom"></div>
+<footer class="footer">
+    <p class="b-box" onclick="goHome()"><i class="bx-title bx-title-1"></i><em class="bx-text">商城首页</em></p>
+    <p class="b-box" onclick="goShoppingCart()"><i class="bx-title bx-title-2"></i><em class="bx-text">购物车</em></p>
+    <p class="b-box" onclick="goLogin()"><i class="bx-title bx-title-3"></i><em class="bx-text">个人中心</em></p>
+    <p class="b-box" onclick="goShopList()"><i class="bx-title bx-title-4"></i><em class="bx-text">实体店铺</em></p>
+    <p class="b-box" onclick="goService()"><i class="bx-title bx-title-5"></i><em class="bx-text">联系客服</em></p>
+</footer>
+<div id="go_top" class="go-top" onclick="javascript:scrollTo(0,0);"></div>
+
+
+{% endblock %}
+
+{% block script %}
+<script>
+    window.onscroll = function(){
+        var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+        var go_top = $G('go_top');
+        if(scroll > 5){
+            go_top.style.display = 'block';
+        } else {
+            go_top.style.display = 'none';
+        }
+    };
+</script>
+{% endblock %}

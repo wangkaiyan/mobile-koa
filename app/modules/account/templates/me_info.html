@@ -1,0 +1,120 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+    <div class="back-btn" onclick="goUrl('/account/profile')"></div>
+    <div class="title-msg">我的资料</div>
+</header>
+
+{% endblock %}
+{% block content %}
+
+<article style="overflow-x: hidden; margin-top: 42px; background: #fff; width: 100%; height: 100%;">
+    <div>
+        <div class="prt-menu">
+            <div class="prt-line">
+                <!--<img src="images/theme1.jpg">-->
+                <a class="prt-line-1">头像</a>
+                <!--<a class="prt-line-2">
+                    <img src="/static/images/right2.png">
+                    <span class="prt-line-1-0" >
+                        <img id="headImgUrl" src="{{member.picturePath}}">
+                        <input type="file" name="file" />
+                    </span>
+                </a>-->
+                <!--<div class="prt-line-2 mright">
+                    <div class="file-upload-line">
+                        <div class="file-upload-word"><img src="/static/images/right2.png"></div>
+                        <div class="file-upload-hidden-input">
+                            <input type="file" name="file">
+                        </div>
+                    </div>
+                    <a class="file-upload-placeholder">&nbsp;</a>
+                </div>
+                <a class="prt-line-1-001">
+                    <img id="headImgUrl" src="{{member.picturePath}}">
+                </a>-->
+                <div class="prt-line-2 mright">
+                    <div class="file-upload-line">
+                        <div class="file-upload-word">
+                            <a class="prt-line-1-001">
+                                <img src="/static/images/right2.png">
+                            </a>
+                            <a class="prt-line-1-001">
+                                <img id="headImgUrl" src="{{member.picturePath}}">
+                            </a>
+                        </div>
+                        <div class="file-upload-hidden-input">
+                            <form id= "uploadForm">
+                            <input type="file" name="file">
+                            </form>
+                        </div>
+                    </div>
+                    <a class="file-upload-placeholder">&nbsp;</a>
+                </div>
+            </div>
+
+            <div class="prt-line" id="userNameDivId">
+                <!--<img src="images/theme1.jpg">-->
+                <a class="prt-line-1">用户名</a>
+                <a class="prt-line-2">
+                    <span class="extra">{{ member.phone }}</span>
+                    <span class="extra">{{ member.email }}</span>
+                </a>
+            </div>
+
+            <div class="prt-line" id="nickNameDivId">
+                <!--<img src="images/theme1.jpg">-->
+                <a class="prt-line-1">昵称</a>
+                <a class="prt-line-2">
+                    <span class="extra">{{ member.nickName }}</span>
+                    <img src="/static/images/right2.png">
+                </a>
+            </div>
+
+            <div class="prt-line">
+                <!--<img src="images/theme1.jpg">-->
+                <a class="prt-line-1" href="/account/password" >修改密码</a>
+                <a class="prt-line-2" href="/account/password" >
+                    <img src="/static/images/right2.png">
+                </a>
+            </div>
+            <div class="prt-line">
+                <!--<img src="images/theme1.jpg">-->
+                <a class="prt-line-1" href="/account/logout" >退出登录</a>
+                <a class="prt-line-2" href="/account/logout">
+                    <img src="/static/images/right2.png">
+                </a>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+{% endblock %}
+
+{% block footer %}
+
+<div id="go_top" class="go-top" onclick="javascript:scrollTo(0,0);"></div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{{ '/static/js/settings.js'|version }}"></script>
+<script>
+    window.onscroll = function(){
+        var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+        var go_top = $G('go_top');
+        if(scroll > 5){
+            go_top.style.display = 'block';
+        } else {
+            go_top.style.display = 'none';
+        }
+    };
+</script>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+<header class="header" style="background: #64318A;">
+    <div class="back-btn" onclick="goBack()"></div>
+</header>
+{% endblock %}
+{% block content %}
+<section class="section">
+    <h1 class="login-header">找回密码</h1>
+    {% if error %}
+    <div class="login-msg0">{{ error }}</div>
+    {% endif %}
+    <div class="login-input-title">
+        <ul>
+            <li id="t_1" class="on">邮箱找回
+            </li>
+            <li id="t_2">
+                <a href="/account/forgot">手机找回</a>
+            </li>
+        </ul>
+    </div>
+    <div style="clear: both;"></div>
+    <form method="post" autocomplete="off">
+        <div id="c_1" class="login-input">
+            <ul>
+                <li><input class="login-i1" placeholder="请输入您注册时的邮箱"  name="email"  value="{{ email }}" required></li>
+                <li style="position: relative;">
+                    <input class="login-i2"  name="captcha" maxlength="5" required placeholder="请输入验证码">
+                    <a id="send1" class="login-msg1" href="javascrpt:void(0)">发送验证码</a>
+                    <a id="send2" class="login-msg2" style="display: none;">120</a>
+                </li>
+                <li><input class="login-i2" name="password" maxlength="20"
+                           required  placeholder="请输入新的密码"></li>
+                <input type="hidden" name="type" value="2"/>
+                <li>
+                    <button class="login-i3">重置密码</button>
+                </li>
+            </ul>
+        </div>
+    </form>
+    <!--<div id="c_2" style="display: none;" class="login-input">
+      <ul>
+        <li style="position: relative;">
+          <input class="login-i1" name="mobile"  value="{{ mobile }}"  placeholder="请输入手机号" required>
+          <a id="send1" class="login-msg1" href="javascrpt:void(0)">发送验证码</a>
+          <a id="send2" class="login-msg2" style="display: none;">60</a>
+        </li>
+        <li><input class="login-i2" placeholder="请输入验证码"></li>
+        <li><input class="login-i2" placeholder="请输入新密码"></li>
+        <input type="hidden" name="type" value="1" />
+        <li><button class="login-i3">重置密码</button></li>
+      </ul>
+    </div>-->
+
+</section>
+{% endblock %}
+
+{% block footer %}
+
+
+{% endblock %}
+
+{% block script %}
+<script src="{{ '/static/js/forgot.js'|version }}"></script>
+<script>
+    function sendMsg() {
+
+    }
+    function goFindPass() {
+        location.href = "register_findpassword2.html";
+    }
+    function showA(val) {
+        switch (val) {
+            case 1:
+                $G('t_1').className = 'on';
+                $G('t_2').className = '';
+
+                $G('c_1').style.display = 'block';
+                $G('c_2').style.display = 'none';
+                break;
+            case 2:
+                $G('t_1').className = '';
+                $G('t_2').className = 'on';
+
+                $G('c_1').style.display = 'none';
+                $G('c_2').style.display = 'block';
+                break;
+        }
+    }
+</script>
+{% endblock %}

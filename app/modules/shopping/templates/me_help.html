@@ -1,0 +1,267 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="title-msg">购买帮助</div>
+</header>
+{% endblock %}
+{% block content %}
+<article style="overflow-x: hidden; background: #fff; margin-top: 42px; width: 100%; ">
+    <div class="help-row">
+        <!--<h3>1."尚五星海外购"特色？</h3>
+        <p>境外实体店家，价格透明</p>
+        <h3>2."尚五星海外购"特色？</h3>
+        <p>境外实体店家，价格透明境外实体店家，价格透明境外实体店家，价格透明境外实体店家，价格透明境外实体店家，价格透明境外实体店家，价格透明</p>-->
+        <h3>【一】正品保障</h3>
+        <p>　尚五星海外购的全部商品提供均为海外实体店铺提供。<br/>
+            　平台对其所售产品质量、价格、货源、仓储、 配送、客服等方面均有严格要求，并通过一套完整的管理体系进行日常管理和监控，以保证所有商品的真实性。</p>
+
+        <h3>【二】邮寄服务</h3>
+        <p>　尚五星海外购不仅把日本本土商品直邮回国，还提供邮寄到日本酒店的服务。<br/>
+            　针对前往日本旅游的游客，需要订单填写酒店名称、详细地址、确认酒店收货时间及收货人信息，购买的商品可以直接邮寄到酒店，方便您空手游玩。</p>
+
+        <h3>Ems官方邮费表</h3>
+        <div style="margin: 2px auto;">
+            <table class="tab-fee">
+                <tr><th>出发地</th><th>目的地</th><th>最小重量</th><th>最大重量</th><th>邮费（日元）</th></tr>
+                <tr><td>日本</td><td>中国</td><td>0</td><td>299</td><td>1400</td></tr>
+                <tr><td>日本</td><td>中国</td><td>300</td><td>499</td><td>1400</td></tr>
+                <tr><td>日本</td><td>中国</td><td>500</td><td>599</td><td>1540</td></tr>
+                <tr><td>日本</td><td>中国</td><td>600</td><td>699</td><td>1680</td></tr>
+                <tr><td>日本</td><td>中国</td><td>700</td><td>799</td><td>1820</td></tr>
+                <tr><td>日本</td><td>中国</td><td>800</td><td>899</td><td>1960</td></tr>
+                <tr><td>日本</td><td>中国</td><td>900</td><td>999</td><td>2100</td></tr>
+                <tr><td>日本</td><td>中国</td><td>1000</td><td>1249</td><td>2400</td></tr>
+                <tr><td>日本</td><td>中国</td><td>1250</td><td>1499</td><td>2700</td></tr>
+                <tr><td>日本</td><td>中国</td><td>1500</td><td>1749</td><td>3000</td></tr>
+                <tr><td>日本</td><td>中国</td><td>1750</td><td>1999</td><td>3300</td></tr>
+                <tr><td>日本</td><td>中国</td><td>2000</td><td>2499</td><td>3800</td></tr>
+                <tr><td>日本</td><td>中国</td><td>2500</td><td>2999</td><td>4300</td></tr>
+                <tr><td>日本</td><td>中国</td><td>3000</td><td>3499</td><td>4800</td></tr>
+                <tr><td>日本</td><td>中国</td><td>3500</td><td>3999</td><td>5300</td></tr>
+                <tr><td>日本</td><td>中国</td><td>4000</td><td>4499</td><td>5800</td></tr>
+                <tr><td>日本</td><td>中国</td><td>4500</td><td>4999</td><td>6300</td></tr>
+                <tr><td>日本</td><td>中国</td><td>5000</td><td>5499</td><td>6800</td></tr>
+                <tr><td>日本</td><td>中国</td><td>5500</td><td>5999</td><td>7300</td></tr>
+                <tr><td>日本</td><td>中国</td><td>6000</td><td>6999</td><td>8100</td></tr>
+                <tr><td>日本</td><td>中国</td><td>7000</td><td>7999</td><td>8900</td></tr>
+                <tr><td>日本</td><td>中国</td><td>8000</td><td>8999</td><td>9700</td></tr>
+                <tr><td>日本</td><td>中国</td><td>9000</td><td>9999</td><td>10500</td></tr>
+                <tr><td>日本</td><td>中国</td><td>10000</td><td>10999</td><td>11300</td></tr>
+                <tr><td>日本</td><td>中国</td><td>11000</td><td>11999</td><td>12100</td></tr>
+                <tr><td>日本</td><td>中国</td><td>12000</td><td>12999</td><td>12900</td></tr>
+                <tr><td>日本</td><td>中国</td><td>13000</td><td>13999</td><td>13700</td></tr>
+                <tr><td>日本</td><td>中国</td><td>14000</td><td>14999</td><td>14500</td></tr>
+                <tr><td>日本</td><td>中国</td><td>15000</td><td>15999</td><td>15300</td></tr>
+                <tr><td>日本</td><td>中国</td><td>16000</td><td>16999</td><td>16100</td></tr>
+                <tr><td>日本</td><td>中国</td><td>17000</td><td>17999</td><td>16900</td></tr>
+                <tr><td>日本</td><td>中国</td><td>18000</td><td>18999</td><td>17700</td></tr>
+                <tr><td>日本</td><td>中国</td><td>19000</td><td>19999</td><td>18500</td></tr>
+                <tr><td>日本</td><td>中国</td><td>20000</td><td>20999</td><td>19300</td></tr>
+                <tr><td>日本</td><td>中国</td><td>21000</td><td>21999</td><td>20100</td></tr>
+                <tr><td>日本</td><td>中国</td><td>22000</td><td>22999</td><td>20900</td></tr>
+                <tr><td>日本</td><td>中国</td><td>23000</td><td>23999</td><td>21700</td></tr>
+                <tr><td>日本</td><td>中国</td><td>24000</td><td>24999</td><td>22500</td></tr>
+                <tr><td>日本</td><td>中国</td><td>25000</td><td>25999</td><td>23300</td></tr>
+                <tr><td>日本</td><td>中国</td><td>26000</td><td>26999</td><td>24100</td></tr>
+                <tr><td>日本</td><td>中国</td><td>27000</td><td>27999</td><td>24900</td></tr>
+                <tr><td>日本</td><td>中国</td><td>28000</td><td>28999</td><td>25700</td></tr>
+                <tr><td>日本</td><td>中国</td><td>29000</td><td>29999</td><td>26500</td></tr>
+                <tr><td>东海</td><td>东海</td><td>0</td><td>1999</td><td>756</td></tr>
+                <tr><td>东海</td><td>东海</td><td>2000</td><td>4999</td><td>1026</td></tr>
+                <tr><td>东海</td><td>东海</td><td>5000</td><td>9999</td><td>1296</td></tr>
+                <tr><td>东海</td><td>东海</td><td>10000</td><td>19999</td><td>1566</td></tr>
+                <tr><td>东海</td><td>东海</td><td>20000</td><td>29999</td><td>1836</td></tr>
+                <tr><td>东海</td><td>信越</td><td>0</td><td>1999</td><td>756</td></tr>
+                <tr><td>东海</td><td>信越</td><td>2000</td><td>4999</td><td>1026</td></tr>
+                <tr><td>东海</td><td>信越</td><td>5000</td><td>9999</td><td>1296</td></tr>
+                <tr><td>东海</td><td>信越</td><td>10000</td><td>19999</td><td>1566</td></tr>
+                <tr><td>东海</td><td>信越</td><td>20000</td><td>29999</td><td>1836</td></tr>
+                <tr><td>东海</td><td>北海道</td><td>0</td><td>1999</td><td>1296</td></tr>
+                <tr><td>东海</td><td>北海道</td><td>2000</td><td>4999</td><td>1566</td></tr>
+                <tr><td>东海</td><td>北海道</td><td>5000</td><td>9999</td><td>1836</td></tr>
+                <tr><td>东海</td><td>北海道</td><td>10000</td><td>19999</td><td>2106</td></tr>
+                <tr><td>东海</td><td>北海道</td><td>20000</td><td>29999</td><td>2376</td></tr>
+                <tr><td>东海</td><td>九州</td><td>0</td><td>1999</td><td>972</td></tr>
+                <tr><td>东海</td><td>九州</td><td>2000</td><td>4999</td><td>1242</td></tr>
+                <tr><td>东海</td><td>九州</td><td>5000</td><td>9999</td><td>1512</td></tr>
+                <tr><td>东海</td><td>九州</td><td>10000</td><td>19999</td><td>1782</td></tr>
+                <tr><td>东海</td><td>九州</td><td>20000</td><td>29999</td><td>2052</td></tr>
+                <tr><td>信越</td><td>信越</td><td>0</td><td>1999</td><td>756</td></tr>
+                <tr><td>信越</td><td>信越</td><td>2000</td><td>4999</td><td>1026</td></tr>
+                <tr><td>信越</td><td>信越</td><td>5000</td><td>9999</td><td>1296</td></tr>
+                <tr><td>信越</td><td>信越</td><td>10000</td><td>19999</td><td>1566</td></tr>
+                <tr><td>信越</td><td>信越</td><td>20000</td><td>29999</td><td>1836</td></tr>
+                <tr><td>信越</td><td>北海道</td><td>0</td><td>1999</td><td>1188</td></tr>
+                <tr><td>信越</td><td>北海道</td><td>2000</td><td>4999</td><td>1458</td></tr>
+                <tr><td>信越</td><td>北海道</td><td>5000</td><td>9999</td><td>1728</td></tr>
+                <tr><td>信越</td><td>北海道</td><td>10000</td><td>19999</td><td>1998</td></tr>
+                <tr><td>信越</td><td>北海道</td><td>20000</td><td>29999</td><td>2268</td></tr>
+                <tr><td>信越</td><td>九州</td><td>0</td><td>1999</td><td>1188</td></tr>
+                <tr><td>信越</td><td>九州</td><td>2000</td><td>4999</td><td>1458</td></tr>
+                <tr><td>信越</td><td>九州</td><td>5000</td><td>9999</td><td>1728</td></tr>
+                <tr><td>信越</td><td>九州</td><td>10000</td><td>19999</td><td>1998</td></tr>
+                <tr><td>信越</td><td>九州</td><td>20000</td><td>29999</td><td>2268</td></tr>
+                <tr><td>北海道</td><td>北海道</td><td>0</td><td>1999</td><td>756</td></tr>
+                <tr><td>北海道</td><td>北海道</td><td>2000</td><td>4999</td><td>1026</td></tr>
+                <tr><td>北海道</td><td>北海道</td><td>5000</td><td>9999</td><td>1296</td></tr>
+                <tr><td>北海道</td><td>北海道</td><td>10000</td><td>19999</td><td>1566</td></tr>
+                <tr><td>北海道</td><td>北海道</td><td>20000</td><td>29999</td><td>1836</td></tr>
+                <tr><td>北海道</td><td>九州</td><td>0</td><td>1999</td><td>1836</td></tr>
+                <tr><td>北海道</td><td>九州</td><td>2000</td><td>4999</td><td>2106</td></tr>
+                <tr><td>北海道</td><td>九州</td><td>5000</td><td>9999</td><td>2376</td></tr>
+                <tr><td>北海道</td><td>九州</td><td>10000</td><td>19999</td><td>2646</td></tr>
+                <tr><td>北海道</td><td>九州</td><td>20000</td><td>29999</td><td>2916</td></tr>
+                <tr><td>九州</td><td>九州</td><td>0</td><td>1999</td><td>756</td></tr>
+                <tr><td>九州</td><td>九州</td><td>2000</td><td>4999</td><td>1026</td></tr>
+                <tr><td>九州</td><td>九州</td><td>5000</td><td>9999</td><td>1296</td></tr>
+                <tr><td>九州</td><td>九州</td><td>10000</td><td>19999</td><td>1566</td></tr>
+                <tr><td>九州</td><td>九州</td><td>20000</td><td>29999</td><td>1836</td></tr>
+                <tr><td>关西</td><td>关西</td><td>0</td><td>1999</td><td>756</td></tr>
+                <tr><td>关西</td><td>关西</td><td>2000</td><td>4999</td><td>1026</td></tr>
+                <tr><td>关西</td><td>关西</td><td>5000</td><td>9999</td><td>1296</td></tr>
+                <tr><td>关西</td><td>关西</td><td>10000</td><td>19999</td><td>1566</td></tr>
+                <tr><td>关西</td><td>关西</td><td>20000</td><td>29999</td><td>1836</td></tr>
+                <tr><td>关西</td><td>关东</td><td>0</td><td>1999</td><td>864</td></tr>
+                <tr><td>关西</td><td>关东</td><td>2000</td><td>4999</td><td>1134</td></tr>
+                <tr><td>关西</td><td>关东</td><td>5000</td><td>9999</td><td>1404</td></tr>
+                <tr><td>关西</td><td>关东</td><td>10000</td><td>19999</td><td>1674</td></tr>
+                <tr><td>关西</td><td>关东</td><td>20000</td><td>29999</td><td>1944</td></tr>
+                <tr><td>关西</td><td>东海</td><td>0</td><td>1999</td><td>756</td></tr>
+                <tr><td>关西</td><td>东海</td><td>2000</td><td>4999</td><td>1026</td></tr>
+                <tr><td>关西</td><td>东海</td><td>5000</td><td>9999</td><td>1296</td></tr>
+                <tr><td>关西</td><td>东海</td><td>10000</td><td>19999</td><td>1566</td></tr>
+                <tr><td>关西</td><td>东海</td><td>20000</td><td>29999</td><td>1836</td></tr>
+                <tr><td>关西</td><td>信越</td><td>0</td><td>1999</td><td>864</td></tr>
+                <tr><td>关西</td><td>信越</td><td>2000</td><td>4999</td><td>1134</td></tr>
+                <tr><td>关西</td><td>信越</td><td>5000</td><td>9999</td><td>1404</td></tr>
+                <tr><td>关西</td><td>信越</td><td>10000</td><td>19999</td><td>1674</td></tr>
+                <tr><td>关西</td><td>信越</td><td>20000</td><td>29999</td><td>1944</td></tr>
+                <tr><td>关西</td><td>北海道</td><td>0</td><td>1999</td><td>1512</td></tr>
+                <tr><td>关西</td><td>北海道</td><td>2000</td><td>4999</td><td>1782</td></tr>
+                <tr><td>关西</td><td>北海道</td><td>5000</td><td>9999</td><td>2052</td></tr>
+                <tr><td>关西</td><td>北海道</td><td>10000</td><td>19999</td><td>2322</td></tr>
+                <tr><td>关西</td><td>北海道</td><td>20000</td><td>29999</td><td>2592</td></tr>
+                <tr><td>关西</td><td>九州</td><td>0</td><td>1999</td><td>864</td></tr>
+                <tr><td>关西</td><td>九州</td><td>2000</td><td>4999</td><td>1134</td></tr>
+                <tr><td>关西</td><td>九州</td><td>5000</td><td>9999</td><td>1404</td></tr>
+                <tr><td>关西</td><td>九州</td><td>10000</td><td>19999</td><td>1674</td></tr>
+                <tr><td>关西</td><td>九州</td><td>20000</td><td>29999</td><td>1944</td></tr>
+                <tr><td>关东</td><td>关东</td><td>0</td><td>1999</td><td>756</td></tr>
+                <tr><td>关东</td><td>关东</td><td>2000</td><td>4999</td><td>1026</td></tr>
+                <tr><td>关东</td><td>关东</td><td>5000</td><td>9999</td><td>1296</td></tr>
+                <tr><td>关东</td><td>关东</td><td>10000</td><td>19999</td><td>1566</td></tr>
+                <tr><td>关东</td><td>关东</td><td>20000</td><td>29999</td><td>1836</td></tr>
+                <tr><td>关东</td><td>东海</td><td>0</td><td>1999</td><td>756</td></tr>
+                <tr><td>关东</td><td>东海</td><td>2000</td><td>4999</td><td>1026</td></tr>
+                <tr><td>关东</td><td>东海</td><td>5000</td><td>9999</td><td>1296</td></tr>
+                <tr><td>关东</td><td>东海</td><td>10000</td><td>19999</td><td>1566</td></tr>
+                <tr><td>关东</td><td>东海</td><td>20000</td><td>29999</td><td>1836</td></tr>
+                <tr><td>关东</td><td>信越</td><td>0</td><td>1999</td><td>756</td></tr>
+                <tr><td>关东</td><td>信越</td><td>2000</td><td>4999</td><td>1026</td></tr>
+                <tr><td>关东</td><td>信越</td><td>5000</td><td>9999</td><td>1296</td></tr>
+                <tr><td>关东</td><td>信越</td><td>10000</td><td>19999</td><td>1566</td></tr>
+                <tr><td>关东</td><td>信越</td><td>20000</td><td>29999</td><td>1836</td></tr>
+                <tr><td>关东</td><td>北海道</td><td>0</td><td>1999</td><td>1188</td></tr>
+                <tr><td>关东</td><td>北海道</td><td>2000</td><td>4999</td><td>1458</td></tr>
+                <tr><td>关东</td><td>北海道</td><td>5000</td><td>9999</td><td>1728</td></tr>
+                <tr><td>关东</td><td>北海道</td><td>10000</td><td>19999</td><td>1998</td></tr>
+                <tr><td>关东</td><td>北海道</td><td>20000</td><td>29999</td><td>2268</td></tr>
+                <tr><td>关东</td><td>九州</td><td>0</td><td>1999</td><td>1188</td></tr>
+                <tr><td>关东</td><td>九州</td><td>2000</td><td>4999</td><td>1458</td></tr>
+                <tr><td>关东</td><td>九州</td><td>5000</td><td>9999</td><td>1728</td></tr>
+                <tr><td>关东</td><td>九州</td><td>10000</td><td>19999</td><td>1998</td></tr>
+                <tr><td>关东</td><td>九州</td><td>20000</td><td>29999</td><td>2268</td></tr>
+            </table>
+        </div>
+        <p class="ise">*尚五星提供24小时售后电话（以防消费者到酒店后查询不到自己购买的商品快递）</p>
+        <p class="ise">*<span style="color: #55BBEE;">提前72小时（本州邮送）96小时（离岛邮送）</span>，（特殊标注送货时效商品除外）默认酒店前台代签收，如需要本人签收必须备注。取货时必须出示本人护照，订单号作为取货凭证。</p>
+
+        <h3>【三】退换货说明</h3>
+        <p>1.境外提货在规定时间内的订单，快递没有送到的货物，商品费用全额退款，邮费由尚五星网支付；</p>
+        <p>2.境外提货在规定时间内的订单，快递送到后消费者自身原因没有收到货物，商品费用全额退款，邮费由消费者支付；</p>
+        <p>3.商品在签收后7个自然天内，在不影响二次销售的前提下，可以进行退货或者更换货品。</p>
+        <p>4.非产品质量问题产生的退换货快递费用由消费者自行承担。尚五星网有义务协助消费者进行售后，最终的解释权属于商家。</p>
+
+        <h3>【四】常见问题答疑Q&A</h3>
+        <h4>1.“尚五星海外购”特色？</h4>
+        <p>　实体店家入驻网站——货真！价实！</p>
+        <p>　热门人气商品推送——引领时尚潮流！</p>
+        <p>　提供送货、邮寄服务——快捷！便利！</p>
+        <p>　退、换货售后服务——安全！可靠！</p>
+        <h4>2.目前“尚五星海外购”出售商品的汇率是如何指定的？</h4>
+        <p>　公司会直接参照中国银行的汇率时时数据，并加入跨境支付通道手续费等因素，给出购物所适用的购物汇率。</p>
+
+        <h4>3.支付方式有哪几种？</h4>
+        <p>　订单提交成功后，在线支付方式目前只有：支付宝支付。</p>
+        <p>　部分商家支持进店购买，现地支付。</p>
+
+
+        <h4>4.支持自取方式？</h4>
+        <p>　酒店提货：留驻酒店-等待提货-出示有效证件（身份证/护照）-验收货品-提货成功</p>
+
+        <h4>5.页面显示有货的商品，为什么下单之后会显示无货呢？</h4>
+        <p>　可能是同时下单的客户比较多时，偶尔会出现此情况，请您选择其他商品。如果您喜欢此商品，可以通过收藏该商品，随时关注库存更新。</p>
+
+        <h4>6.商品的规格是什么？性能或质量怎样？</h4>
+        <p>　您可以查看商品介绍-商品规格，里面会具体介绍商品规格情况，您也可以拨打网站售后电话，协助您咨询商品性能问题。</p>
+
+        <h4>7.是否支持拨打客服热线订购商品吗？</h4>
+        <p>　您好，暂不提供电话订购服务，请您登陆网站注册下单，感谢您的配合。</p>
+
+        <h4>8.订单提交成功后还可以修改订单信息吗？</h4>
+        <p>　1）在线支付订单，未发货：您可以联系客服取消订单并退款。</p>
+        <p>　2）在线支付订单，已发货：不可进行任何信息修改，如要退货，联系客服取消订单并退款。</p>
+
+        <h4>9.订单提交成功后商品降价了，可以退给我差价吗？</h4>
+        <p>　暂时没有此类价格保护的服务，已实际下单价格为准。</p>
+
+        <h4>10. 订单拒收后，退款什么时候返还？</h4>
+        <p>　境外订单拒收后，请您先电话客服告知订单号后给予退款。退款到账日期请关注各支付机构的到账时间。</p>
+
+        <h4>11. 商品包装是否有保证？</h4>
+        <p>　我们所发送商品均由专人进行打包，商品在未签收前都由我们负责，如在收到商品时发现包装有破损或是其它方面问题，请直接致电客服热线，客服人员会帮您解决。</p>
+
+        <h4>12. 在加入购物车后，是不是该商品已经被我预定了？</h4>
+        <p>　并不是，如果您想订购该商品，请把该商品加入购物车后进行结算。</p>
+
+        <h4>13. 发票：我公司为境外商家代收款平台，不能提供境内发票。</h4>
+        <p>　境外消费是不支持开具发票，是否提供消费小票也由商家自行决定。</p>
+
+        <h4>14. 配送费：是否有配送费，如何收取？</h4>
+        <p>　第三方卖家运输收费标准：具体以商品详情页公示的运费为准。</p>
+
+        <h4>15. 提货：酒店自提时，客人不在，酒店服务台可以代收商品</h4>
+        <p>　酒店自提时，您必须是入住酒店的客人，前台才会代收您的包裹。</p>
+
+        <h4>16.酒店提货需要注意哪些？</h4>
+        <p>　提货信息必须是入住酒店人员。如不是，酒店将不予提供代收服务，由此产生的来回运费损失需要客户自行承担。</p>
+        <br/><br/><br/><br/><br/><br/>
+    </div>
+
+</article>
+{% endblock %}
+
+{% block footer %}
+<div id="go_top" class="go-top" onclick="javascript:scrollTo(0,0);"></div>
+{% endblock %}
+
+{% block script %}
+<script>
+    window.onscroll = function(){
+        var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+        var go_top = $G('go_top');
+        if(scroll > 5){
+            go_top.style.display = 'block';
+        } else {
+            go_top.style.display = 'none';
+        }
+    };
+</script>
+{% endblock %}

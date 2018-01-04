@@ -1,0 +1,81 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="title-msg">我的代金券</div>
+</header>
+{% endblock %}
+{% block content %}
+<article style="overflow-x: hidden; margin-top: 42px; width: 100%; height: 100%;">
+    {% if type ===  0%}
+        {% for item in list %}
+        <!--<div class="v-row" data-id="{{item.id}}"  onclick="jump('/shopping/confirm', {{item.id}})">-->
+        <div class="v-row" data-id="{{item.id}}">
+            <dl class="v-line">
+                <dt>円<span>{{item.price}}</span></dt>
+                <dd>
+                    <div class="v-line-1">{{item.description}}</div>
+                    <!--<div class="v-line-2">{{item.startAt |date('Y-m-d H:i:s')}}
+                        至{{item.expireAt  |date('Y-m-d H:i:s')}}</div>-->
+                    <div class="v-line-2">{{item.startAt |date('Y-m-d')}} 至</div>
+                    <div class="v-line-2">{{item.expireAt  |date('Y-m-d')}}</div>
+                </dd>
+            </dl>
+        </div>
+         {% endfor %}
+    {% endif %}
+
+
+    {% if type ===  1%}
+        {% for item in list %}
+        <div class="v-row" data-id="{{item.id}}"  onclick=" jump('/shopping/confirm','{{item.id}}' ,'{{item.premise}}','{{orderPrice}}') ">
+       <!-- <div class="v-row" data-id="{{item.id}}" onclick=" jump('/shopping/confirm', {{item.id}})">-->
+            <dl class="v-line">
+                <dt>円<span>{{item.price}}</span></dt>
+                <dd>
+                    <div class="v-line-1">{{item.description}}</div>
+                    <div class="v-line-2">{{item.startAt |date('Y-m-d')}} 至</div>
+                    <div class="v-line-2">{{item.expireAt  |date('Y-m-d')}}</div>
+                </dd>
+            </dl>
+        </div>
+        {% endfor %}
+    {% endif %}
+
+
+
+</article>
+{% endblock %}
+
+{% block footer %}
+<div id="go_top" class="go-top" onclick="javascript:scrollTo(0,0);"></div>
+{% endblock %}
+
+{% block script %}
+<script>
+    window.onscroll = function(){
+        var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+        var go_top = $G('go_top');
+        if(scroll > 5){
+            go_top.style.display = 'block';
+        } else {
+            go_top.style.display = 'none';
+        }
+    };
+
+    function jump(url,couponId,premise,orderPrice){
+        if(parseInt(premise) > parseInt(orderPrice)){
+//            alert("");
+            notice('订单金额不满足！');
+        }else{
+            location.href= url+"?couponId="+couponId;
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+<header class="header" style="background: #64318A;">
+    <div class="back-btn" onclick="goBack()"></div>
+</header>
+{% endblock %}
+{% block content %}
+<section class="section">
+    <h1 class="login-header">会员注册</h1>
+    {% if error %}
+    <div class="login-msg0">{{ error }}</div>
+    {% endif %}
+    <div class="login-input-title">
+        <ul>
+            <li id="t_1"  >
+                <a href="/account/registerEmail">邮箱注册</a>
+            </li>
+            <li id="t_2"   class="on">手机注册</li>
+        </ul>
+    </div>
+ <!--   <div id="c_1" class="login-input">
+        <ul>
+            <li><input class="login-i1" placeholder="请输入邮箱"></li>
+            <li><input class="login-i2" placeholder="请输入登录密码"></li>
+            <input type="hidden" name="type" value="1" />
+            <li>
+                <button class="login-i3" onclick="goRegEmail()">注册</button>
+            </li>
+        </ul>
+    </div>-->
+    <form method="post" autocomplete="off">
+        <div id="c_2"  class="login-input">
+            <ul>
+                <li style="position: relative;">
+                    <input class="login-i1"  type="tel" pattern="[0-9]*" name="mobile" placeholder="请输入手机号" maxlength="11"
+                           value="{{ mobile }}" required/>
+                    <a id="send1" class="login-msg1" href="javascrpt:void(0)">发送验证码</a>
+                    <a id="send2" class="login-msg2" style="display: none;">120</a>
+                </li>
+                <li>
+                    <input class="login-i2" type="text" name="captcha" placeholder="请输入验证码" maxlength="5" required>
+                </li>
+                <li>
+                    <input class="login-i2" type="password" name="password" placeholder="请设置登录密码 (至少6位)" maxlength="20"
+                           required>
+                </li> <input type="hidden" name="type" value="1" />
+                <li>
+                    <button class="login-i3">注册</button>
+                </li>
+            </ul>
+        </div>
+    </form>
+    <div class="login-help2">
+        <span>点击“注册”即同意了</span>
+        <a>尚五星服务协议条款</a>
+    </div>
+    <div class="login-help">
+        <ul>
+            <li><a href="/account/login"><i class="login-help-r1"></i><em>登录</em></a></li>
+            <li><a href="/account/forgot"><i class="login-help-r2"></i><em>忘记密码</em></a></li>
+        </ul>
+    </div>
+</section>
+{% endblock %}
+
+{% block footer %}
+
+
+{% endblock %}
+
+{% block script %}
+<script src="{{ '/static/js/register.js'|version }}"></script>
+<script>
+    function goRegEmail() {
+        location.href = "register_email2.html";
+    }
+    function sendMsg2() {
+        $("#send1").css("display", "none");
+        $("#send2").css("display", "");
+        var i = 60;
+        var interval = setInterval(function () {
+            if (i > 0) {
+                i--;
+                $("#send2").html(i);
+            } else {
+                clearInterval(interval);
+                i = 60;
+                $("#send2").html(i);
+                $("#send1").css("display", "");
+                $("#send2").css("display", "none");
+            }
+        }, 1000);
+    }
+
+    function showA(val) {
+        switch (val) {
+            case 1:
+                $G('t_1').className = 'on';
+                $G('t_2').className = '';
+
+                $G('c_1').style.display = 'block';
+                $G('c_2').style.display = 'none';
+                break;
+            case 2:
+                $G('t_1').className = '';
+                $G('t_2').className = 'on';
+
+                $G('c_1').style.display = 'none';
+                $G('c_2').style.display = 'block';
+                break;
+        }
+    }
+</script>
+{% endblock %}

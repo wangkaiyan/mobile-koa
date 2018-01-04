@@ -1,0 +1,61 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="title-msg">商品评价</div>
+</header>
+{% endblock %}
+{% block content %}
+<article style="overflow-x: hidden; margin-top: 40px; width: 100%; height: 100%;">
+    {% for orderSub in orderSubs %}
+    {% if orderSub.evaluateStatus == 0 %}
+    <div class="box-1">
+        <div class="box-1-wrap">
+            <div class="b1w-status">
+                {% if orderSub.evaluateStatus == 0 %}
+                        未评价
+                {% endif %}
+                {% if orderSub.evaluateStatus == 1 %}
+                        已评价
+                {% endif %}
+            </div>
+            <div class="b1w-content">
+                <dl>
+                    <dt><img src="{{orderSub.productImg}}"></dt>
+                    <dd>
+                        <ul>
+                            <li>{{orderSub.productName}}</li>
+                            <li>价格：{{orderSub.totalPrice}}日元&nbsp;&nbsp;数量：{{orderSub.count}}件</li>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+            <div class="b1w-btn" style="padding-right: 0;">
+                <textarea class="ta-textarea" id="{{orderSub.code}}" placeholder="说说你对商品的评价"  maxlength="100"></textarea>
+            </div>
+            {% if orderSub.evaluateStatus == 0 %}
+            <div class="b1w-btn">
+                <a class="btn-edit2" href="#"  data-code="{{orderSub.code}}">确定</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</article>
+{% endblock %}
+
+{% block footer %}
+
+
+{% endblock %}
+
+{% block script %}
+<script src="{{ '/static/js/shopping.js'|version }}"></script>
+{% endblock %}

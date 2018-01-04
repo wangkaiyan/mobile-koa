@@ -1,0 +1,67 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="search-box2">
+        <input placeholder="请输入关键字" type="text" class="search-input2">
+    </div>
+    <a class="search-bar2">搜索</a>
+</header>
+{% endblock %}
+{% block content %}
+<article style="overflow-x: hidden; margin-top: 42px;">
+    <div style="background: #fff;">
+        <div class="shop-row" style="margin-top: 0;">
+            <div class="slider">
+                <ul>
+                    {% for item in entity.imgs %}
+                    <li><img src="{{item}}"></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="shop-desc">
+            <h2>店铺介绍</h2>
+            <h3>店铺名</h3>
+            <p><span>&nbsp;</span>{{entity.name}}</p>
+            <h3>店铺详情</h3>
+            <p><span>&nbsp;</span>{{entity.description}}</p>
+            <h3>店铺地址</h3>
+            <p><span>&nbsp;</span>{{entity.address}}</p>
+        </div>
+    </div>
+</article>
+{% endblock %}
+
+{% block footer %}
+<div class="placeholder-bottom"></div>
+<footer class="footer">
+    <p class="b-box" onclick="goHome()"><i class="bx-title bx-title-1"></i><em class="bx-text">商城首页</em></p>
+    <p class="b-box" onclick="goShoppingCart()"><i class="bx-title bx-title-2"></i><em class="bx-text">购物车</em></p>
+    <p class="b-box" onclick="goLogin()"><i class="bx-title bx-title-3"></i><em class="bx-text">个人中心</em></p>
+    <p class="b-box" onclick="goShopList()"><i class="bx-title bx-title-4"></i><em class="bx-text">实体店铺</em></p>
+    <p class="b-box" onclick="goService()"><i class="bx-title bx-title-5"></i><em class="bx-text">联系客服</em></p>
+</footer>
+<div id="go_top" class="go-top" onclick="javascript:scrollTo(0,0);"></div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ '/static/js/my2.js'|version }}"></script>
+<script>
+    window.onscroll = function(){
+        var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+        var go_top = $G('go_top');
+        if(scroll > 5){
+            go_top.style.display = 'block';
+        } else {
+            go_top.style.display = 'none';
+        }
+    };
+</script>
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends './modules/common/templates/main20.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+<script src="/static/dev/js/mobiscroll.core-2.6.2.js" type="text/javascript"></script>
+<script src="/static/dev/js/mobiscroll.core-2.6.2-zh.js" type="text/javascript"></script>
+<link href="/static/dev/css/mobiscroll.core-2.6.2.css" rel="stylesheet" type="text/css" />
+<link href="/static/dev/css/mobiscroll.animation-2.6.2.css" rel="stylesheet" type="text/css" />
+<script src="/static/dev/js/mobiscroll.datetime-2.6.2.js" type="text/javascript"></script>
+<script src="/static/dev/js/mobiscroll.list-2.6.2.js" type="text/javascript"></script>
+<script src="/static/dev/js/mobiscroll.select-2.6.2.js" type="text/javascript"></script>
+<script src="/static/dev/js/mobiscroll.android-2.6.2.js" type="text/javascript"></script>
+<link href="/static/dev/css/mobiscroll.android-2.6.2.css" rel="stylesheet" type="text/css" />
+<script src="/static/dev/js/mobiscroll.android-ics-2.6.2.js" type="text/javascript"></script>
+<link href="/static/dev/css/mobiscroll.android-ics-2.6.2.css" rel="stylesheet" type="text/css" />
+<script src="/static/dev/js/mobiscroll.ios-2.6.2.js" type="text/javascript"></script>
+<link href="/static/dev/css/mobiscroll.ios-2.6.2.css" rel="stylesheet" type="text/css" />
+<script src="/static/dev/js/mobiscroll.jqm-2.6.2.js" type="text/javascript"></script>
+<link href="/static/dev/css/mobiscroll.jqm-2.6.2.css" rel="stylesheet" type="text/css" />
+<link href="/static/dev/css/mobiscroll.sense-ui-2.6.2.css" rel="stylesheet" type="text/css" />
+<script src="/static/dev/js/mobiscroll.wp-2.6.2.js" type="text/javascript"></script>
+<link href="/static/dev/css/mobiscroll.wp-2.6.2.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    $(function () {
+        var opt = {date:{preset : 'date', minDate: new Date(2000,3,10,9,22), maxDate: new Date(2099,12,31,15,44)}};
+        $('#start_date')
+                .scroller('destroy')
+                .scroller($.extend(opt['date'],
+                        { theme: 'default', mode: 'scroller',
+                            display: 'bottom', lang: 'zh' ,formatResult: function (d) {
+                            return d[2]+'-'+(parseInt(d[1])+1)+'-'+d[0];
+                        }}));
+        $('#end_date')
+                .scroller('destroy')
+                .scroller($.extend(opt['date'],
+                        { theme: 'default', mode: 'scroller',
+                            display: 'bottom', lang: 'zh' ,formatResult: function (d) {
+                            return d[2]+'-'+(parseInt(d[1])+1)+'-'+d[0];
+                        }}));
+    });
+</script>
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="title-msg">新增收货地址</div>
+</header>
+{% endblock %}
+{% block content %}
+<form name="address" action="/account/leader/addHotel" method="post">
+<article style="overflow-x: hidden; margin-top: 40px; background: #fff; width: 100%; height: 100%;">
+    <div class="address-wrap">
+        {% if teamCode %}
+        <div class="address-n">
+            <dl>
+                <dt class="an-line">团号</dt>
+                <dd class="an-line">
+                    <input class="input-line"  value="{{ teamCode }}" type="text"  readonly="readonly">
+                </dd>
+            </dl>
+        </div>
+        {% endif %}
+
+        <div class="address-n">
+            <dl>
+                <dt class="an-line">收货人 名字</dt>
+                <dd class="an-line">
+                    <input class="input-line"  name="receiveName" value="{{ receiveName }}" type="text" placeholder="收货人名字" required></dd>
+            </dl>
+        </div>
+        <div class="address-n">
+            <dl>
+                <dt class="an-line">所在地区</dt>
+                <dd class="an-line">
+                    <select id="country" name="province" class="leader-content-select2" onchange="changeCity(this)">
+                        <option value="日本">日本</option>
+                    </select>
+                    <input type="hidden" name="city"  />
+                    <select  class="leader-content-select2" id="cityJP">
+                        <option value="">请选择城市</option>
+                        <option value="东海">东海</option>
+                        <option value="信越">信越</option>
+                        <option value="北海道">北海道</option>
+                        <option value="九州">九州</option>
+                        <option value="关西">关西</option>
+                        <option value="关东">关东</option>
+                    </select>
+                </dd>
+            </dl>
+            </dl>
+        </div>
+        <div class="address-n">
+            <textarea name="address"  placeholder="请输入酒店名字和详细地址" type="text" maxlength="100" required>{{ address }}</textarea>
+        </div>
+        <div class="address-n">
+            <dl>
+                <dt class="an-line">手机号码</dt>
+                <dd class="an-line">
+                    <input name="phone" value="{{ phone }}" class="input-line" type="text" placeholder="手机号" required></dd>
+            </dl>
+        </div>
+        <div class="address-n">
+            <dl>
+                <dt class="an-line">收货日期</dt>
+                <dd class="an-line">
+                    {% if teamCode %}
+                    <input class="input-line select-date" id="start_date"  value="{{ goodsReceiveSdate  |date('Y-m-d')  }}" type="text" required>至
+                    <input class="input-line select-date2" id="end_date"  value="{{ goodsReceiveEdate |date('Y-m-d') }}"  type="text" required>
+                    {% else %}
+                    <input class="input-line select-date" id="start_date"  value="{{ goodsReceiveSdate }}" type="text" required>至
+                    <input class="input-line select-date2" id="end_date"  value="{{ goodsReceiveEdate  }}"  type="text" required>
+                    {% endif %}
+                    <input type="hidden" name="goodsReceiveEdate"  />
+                    <input type="hidden" name="goodsReceiveSdate"  />
+                    <!--<input class="input-line" type="text" placeholder="收货日期" required>--></dd>
+            </dl>
+        </div>
+    </div>
+    <input type="hidden" name="id" value="{{ id }}" />
+    <input type="hidden" name="teamCode" value="{{ teamCode }}" />
+  <!--  <a class="btn-new" href="/account/leader/hotel" >保存收货地址</a>-->
+    <button class="btn-new button warning square">保存地址</button>
+</article>
+</form>
+{% endblock %}
+
+{% block footer %}
+<div id="go_top" class="go-top" onclick="javascript:scrollTo(0,0);"></div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ '/static/js/addresshotel.js'|version }}"></script>
+<script>
+    window.onscroll = function(){
+        var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+        var go_top = $G('go_top');
+        if(scroll > 5){
+            go_top.style.display = 'block';
+        } else {
+            go_top.style.display = 'none';
+        }
+    };
+
+
+    $("#cityJP option[value='{{ city }}']").attr("selected", 'selected');
+
+</script>
+{% endblock %}

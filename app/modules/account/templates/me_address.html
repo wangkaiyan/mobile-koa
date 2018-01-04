@@ -1,0 +1,59 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="title-msg">我的收货地址</div>
+</header>
+{% endblock %}
+{% block content %}
+<article style="overflow-x: hidden; margin-top: 42px; width: 100%;">
+
+    {% for address in list %}
+    <div class="address-row" data-id="{{ address.id }}">
+        <dl>
+            <dt class="ar-line">收货人：{{address.userName}} <span>{{address.phone}}
+                <a class="arl-pic"><img src="/static/images/right2.png"></a></span></dt>
+            <dd class="ar-line">{{address.address}}</dd>
+            <dd class="at-btn">
+                <div class="shopping-cart-row-title2">
+                    <label>
+                        <input name="default" class="buy-select2 small" type="radio"  value="{{address.id }}" {% if address.isDefault === 1 %}checked{% endif %} />
+                        <span class="addr-ttx addr-ttx-on">默认</span>
+                       <!-- <input type="radio" ui-mode="checkbox" class="small" name="default" value="{{ item.id }}" {% if address.isDefault === 1 %}checked{% endif %} /> 设为默认
+-->
+                    </label>
+                </div>
+                <a class="btn-edit3" href="/account/address/{{address.id}}">编辑</a>
+                <a class="btn-delete3" {% if address.isDefault === 1 %}disabled='true'{% endif %}>删除</a>
+            </dd>
+        </dl>
+    </div>
+    {% endfor %}
+    <a class="btn-new" href="/account/address">新建</a>
+</article>
+{% endblock %}
+
+{% block footer %}
+<div id="go_top" class="go-top" onclick="javascript:scrollTo(0,0);"></div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ '/static/js/address.js'|version }}"></script>
+<script>
+    window.onscroll = function(){
+        var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+        var go_top = $G('go_top');
+        if(scroll > 5){
+            go_top.style.display = 'block';
+        } else {
+            go_top.style.display = 'none';
+        }
+    };
+</script>
+{% endblock %}

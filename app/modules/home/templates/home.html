@@ -1,0 +1,203 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<!--<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>-->
+{% endblock %}
+
+
+{% block header %}
+
+<header class="header">
+    <!--<div class="logo"></div>
+    <div class="search-box"><input placeholder="请输入关键字" type="text" class="search-input"></div>
+    <a class="search-bar" href="search.html">搜索</a>
+    <div class="rate">
+        <i>今日汇率:</i><br/>
+        <i>100円￥6.70</i>
+    </div>-->
+    <!--<div class="logo11"></div>-->
+    <div class="logo"></div>
+    <div class="search-box11"><input value="实体店家 海外直邮 正品保障" onclick="toggleSearchMask()" type="text" class="search-input11"></div>
+    <a class="search-button" href="javascript:void(0)" onclick="toggleSearchMask()"></a>
+</header>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+
+<div id="search-mask" class="search-mask" style="display: none;">
+    <header class="header">
+        <div class="logo11x">
+            商品搜索
+        </div>
+        <a class="search-button-x" href="javascript:void(0)" onclick="toggleSearchMask()"></a>
+    </header>
+    <div class="search-box-wrap">
+        <div class="search-box-x">
+            <input placeholder="请输入关键字" id="search-home-search2" type="text" class="search-input-x">
+        </div>
+        <a class="search-bar-x"  href="#" onclick="a()">搜索</a>
+    </div>
+    <div class="rate-wap">今日汇率1：100日元 = {{rate.rate}}人民币</div>
+
+</div>
+<article style="overflow-x: hidden;margin-top: 40px;">
+    <!--<div class="notice">海外实体店入驻，网上下单，店铺直邮，货真价实</div>-->
+    <div class="slider">
+        <ul>
+         <!--   <li><img src="images/banner1.jpg"></li>
+            <li><img src="images/banner1.jpg"></li>
+            <li><img src="images/banner1.jpg"></li>-->
+            {% for item in rolling.list %}
+            <li>
+                <a href="/shopping/theme/{{item.id}}">
+                     <img   src="{{item.imgs}}">
+                 </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div style="padding-top: 16px;">
+        <div class="navigator">
+            <a class="n-sub" href="/shopping?rootCategoryId=1"><dl><dt class="ns-pic ns-pic-1"></dt><dd>美妆</dd></dl></a>
+            <a class="n-sub" href="/shopping?rootCategoryId=6"><dl><dt class="ns-pic ns-pic-2"></dt><dd>个护</dd></dl></a>
+            <a class="n-sub" href="/shopping?rootCategoryId=4"><dl><dt class="ns-pic ns-pic-3"></dt><dd>母婴</dd></dl></a>
+            <a class="n-sub" href="/shopping/moreChannel"><dl><dt class="ns-pic ns-pic-4"></dt><dd>更多</dd></dl></a>
+        </div>
+        <div class="navigator">
+            <a class="n-sub" href="/shopping?rootCategoryId=8"><dl><dt class="ns-pic ns-pic-5"></dt><dd>家电</dd></dl></a>
+            <a class="n-sub" href="/shopping?rootCategoryId=7"><dl><dt class="ns-pic ns-pic-6"></dt><dd>食品</dd></dl></a>
+            <a class="n-sub" href="/shopping?rootCategoryId=5"><dl><dt class="ns-pic ns-pic-7"></dt><dd>家居</dd></dl></a>
+            <a class="n-sub" href="/shopping/video"><dl><dt class="ns-pic ns-pic-8"></dt><dd>视频</dd></dl></a>
+        </div>
+    </div>
+    <div class="theme">
+
+
+        {% for item in themes.list %}
+           <div class="theme-row">
+               <a href="/shopping/theme/{{item.id}}"   ><img  src="{{ item.imgs }}"></a>
+           </div>
+        {% endfor %}
+       <!-- aa
+        <div class="theme-row"><a><img src="images/theme1.jpg"></a></div>
+        <div class="theme-row"><a><img src="images/theme2.jpg"></a></div>
+        <div class="theme-row"><a><img src="images/theme3.jpg"></a></div>
+        <div class="theme-row"><a><img src="images/theme4.jpg"></a></div>
+        <div class="theme-row"><a><img src="images/theme5.jpg"></a></div>
+        <div class="theme-row"><a><img src="images/theme1.jpg"></a></div>
+        <div class="theme-row"><a><img src="images/theme2.jpg"></a></div>
+        <div class="theme-row"><a><img src="images/theme3.jpg"></a></div>
+        <div class="theme-row"><a><img src="images/theme4.jpg"></a></div>
+        <div class="theme-row"><a><img src="images/theme5.jpg"></a></div>-->
+
+    </div>
+    <div class="products">
+
+        <ul id="goods">
+
+            {% for item in list %}
+
+                <li>
+                    <div class="li-wrap">
+                        <a href="/shopping/details/{{item.id}}"><img src="{{ item.img }}"></a>
+                        <div class="p-title">
+                            <dl>
+                                <dt><strong><a>{{ item.name}}</a></strong></dt>
+                                <dd>人民币：{{item.priceCh}}元</dd>
+                                <dd>日<i>&nbsp;</i>元：{{item.price}}円</dd>
+                            </dl>
+                            <span>已售{{ item.buyCount}}件</span>
+                        </div>
+                    </div>
+                </li>
+
+            {% endfor %}
+        </ul>
+
+    </div>
+</article>
+{% raw %}
+<script id="goodsTempl" type="text/swig-template">
+    {% for item in list %}
+        <li>
+            <div class="li-wrap">
+                <a href="/shopping/details/{{item.id}}"><img src="{{ item.img }}"></a>
+                <div class="p-title">
+                    <dl>
+                        <dt><strong><a>{{ item.name}}</a></strong></dt>
+                        <dd>人民币：{{item.priceCh}}元</dd>
+                        <dd>日<i>&nbsp;</i>元：{{item.price}}円</dd>
+                    </dl>
+                    <span>已售{{ item.buyCount }}件</span>
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+</script>
+{% endraw %}
+{% endblock %}
+
+
+
+{% block footer %}
+<div class="placeholder-bottom"></div>
+<footer class="footer">
+    <p class="b-box" onclick="goHome()"><i class="bx-title bx-title-1"></i><em class="bx-text">商城首页</em></p>
+    <p class="b-box" onclick="goShoppingCart()"><i class="bx-title bx-title-2"></i><em class="bx-text">购物车</em></p>
+    <p class="b-box" onclick="goLogin()"><i class="bx-title bx-title-3"></i><em class="bx-text">个人中心</em></p>
+    <p class="b-box" onclick="goShopList()"><i class="bx-title bx-title-4"></i><em class="bx-text">实体店铺</em></p>
+    <p class="b-box" onclick="goService()"><i class="bx-title bx-title-5"></i><em class="bx-text">联系客服</em></p>
+</footer>
+<div id="go_top" class="go-top" onclick="javascript:scrollTo(0,0);"></div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ '/static/js/home.js'|version }}"></script>
+<script src="{{ '/static/js/my.js'|version }}"></script>
+<script>
+    window.onscroll = function(){
+        var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+        var go_top = $G('go_top');
+        if(scroll > 5){
+            go_top.style.display = 'block';
+        } else {
+            go_top.style.display = 'none';
+        }
+    };
+    var status = 0;
+    function toggleSearchMask() {
+        $(document).scrollTop(0);
+        if(status == 0){
+            $('#search\\-mask').css('display', 'block');
+            $('#search\\-home\\-search2').focus();
+            $('body').addClass('overflowx');
+        } else {
+            $('#search\\-mask').css('display', 'none');
+            $(document.body).focus();
+            $('body').removeClass('overflowx');
+        }
+        status = Math.abs(status - 1);
+    }
+
+    function a() {
+        debugger
+        var content = $('input#search-home-search2').val();
+        if(content == null || content == ''){
+            notice('搜索内容不能为空')
+        }else{
+            location.href = '/shopping/search?content=' + content;
+        }
+
+
+    }
+
+</script>
+{% endblock %}

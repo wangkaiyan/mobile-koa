@@ -1,0 +1,111 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<!--<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>-->
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="title-msg" style="font-weight: normal;">我的购物车</div>
+</header>
+
+{% endblock %}
+
+
+{% block content %}
+
+<article style="overflow-x: hidden; margin-top: 42px;">
+    <div class="shopping-cart">
+
+        {% for item in list %}
+
+        <div class="shopping-cart-row">
+            <div class="shopping-cart-row-title"><label>
+                <input class="buy-select"  value="{{ item.shopId }}"  name="buy-select-shop" type="checkbox">
+                <em>供应商： {{ item.shopName }}</em></label>
+            </div>
+            {% for product in item.products %}
+            <div class="sc-line" data-sku="{{ product.id }}">
+                <dl class="sc-line-row">
+                    <dt>
+                        <div class="shopping-cart-row-title">
+                            <label>
+                                 <input class="buy-select2 product-shop-{{item.shopId}} " value="{{ product.id }}"  name="goods-select2" type="checkbox" {% if simular %}checked{% endif %}>
+                            </label>
+                        </div>
+                    </dt>
+                    <dd class="p-title2-img"><img src="{{product.img}}"></dd>
+                    <dd class="p-title2-info">
+                        <ul>
+                            <li><span class="pt-title">{{product.name}}</span></li>
+                            <li><span class="pt-price">￥{{product.priceCh}}&nbsp;&nbsp;円{{product.price}}</span></li>
+                            {%  if member.userType ===  2 %}
+                            <li><span class="pt-price">￥{{product.leaderPriceCh}}&nbsp;&nbsp;円{{product.leaderPrice}}(领队价)</span></li>
+                            {% endif %}
+                            <li>
+                                <div class="li-button">
+                                    <ul><li class="add-1-x" id="minus_cart"></li>
+                                        <li class="add0-x">
+                                            <input class="add0-x-input" type="text" name="count_cart"  value="{{product.count}}" readonly="readonly" />
+                                        </li>
+                                        <li class="add1-x" id="plus_cart" ></li>
+                                    </ul>
+                                    <a class="li-button-delete"><img src="/static/images/delete1.png"></a>
+                                   <!-- <input type="hidden" value="1">-->
+                                </div>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+    </div>
+</article>
+
+{% endblock %}
+
+
+{% block footer %}
+
+<div class="placeholder-bottom"></div>
+<footer class="footer2" style="height: 4em;">
+    <div class="fm-line2-left">
+        <span class="span1">
+            <label>
+                 <input class="buy-check" type="checkbox"  name="checkAll_goods" >全选
+            </label>
+        </span>
+        <span class="span2">合计：<i class="text-orange-total">￥</i></span>
+    </div>
+    <div class="fm-line2-right">
+        <button type="button" class="buy-btn" >去结算</button>
+     <!--   <button type="button" class="buy-btn" onclick="goPay()">去结算</button>-->
+    </div>
+</footer>
+<div id="go_top" class="go-top" style="bottom: 56px;" onclick="javascript:scrollTo(0,0);"></div>
+{% endblock %}
+
+
+{% block script %}
+<script src="{{ '/static/js/shopping.js'|version }}"></script>
+<script>
+    window.onscroll = function(){
+        var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+        var go_top = $G('go_top');
+        if(scroll > 5){
+            go_top.style.display = 'block';
+        } else {
+            go_top.style.display = 'none';
+        }
+    };
+    function goPay() {
+        location.href = 'me_order_ensure.html';
+    }
+</script>
+{% endblock %}
+

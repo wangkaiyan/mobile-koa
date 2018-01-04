@@ -1,0 +1,126 @@
+{% extends './modules/common/templates/main2.html' %}
+{% block style %}
+<!--<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>-->
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+  <div class="back-btn" onclick="goBack()"></div>
+  <div class="search-box2"><input  id="search-home-search2" placeholder="请输入关键字" type="text" class="search-input2"></div>
+  <a class="search-bar2" href="#" onclick="a()" >搜索</a>
+</header>
+{% endblock %}
+
+{% block content %}
+<article style="overflow-x: hidden; margin-top: 80px;">
+  <div class="float-menu">
+    <!--<ul id="fm_line1" class="fm-line1">
+        <li><a>面部护理</a></li>
+        <li><a>面部护理</a></li>
+        <li><a>面膜</a></li>
+        <li><a>身体护理</a></li>
+        <li><a>彩妆</a></li>
+        <li><a>香水</a></li>
+        <li><a>男士护理</a></li>
+        <li><a>美容工具</a></li>
+        <li><a>赠品</a></li>
+    </ul>-->
+    <div id="fm_line2" class="fm-line2">
+     <!-- <a href="/shopping?rootCategoryId={{rootCategoryId}}" >全部类别</a>-->
+      <a href="/shopping/moreChannel" >全部类别</a>
+    </div>
+    <div class="fm-line3" onclick="toggleShow()"><div class="fm-line3-dot"></div></div>
+  </div>
+  <div id="float_menu2" class="float-menu2" style="display: none;" data-rootchannel="{{ rootCategoryId }}"  data-channel="{{ channel }}">
+    <ul class="fm2-line1">
+      {% for item in category %}
+        <li><a href="/shopping/category/{{item.id}}?root={{item.parentId}}">{{item.name}}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="products">
+    <ul id="goods">
+      {% for item in list %}
+      <li>
+        <div class="li-wrap">
+          <a href="/shopping/details/{{item.id}}"><img src="{{ item.img }}"></a>
+          <div class="p-title">
+            <dl>
+              <dt><strong><a>{{ item.name }}</a></strong></dt>
+              <dd>人民币：{{item.priceCh}}元</dd>
+              <dd>日<i>&nbsp;</i>元：{{item.price}}円</dd>
+            </dl>
+            <span>已售{{ item.buyCount}}件</span>
+          </div>
+        </div>
+      </li>
+      {% endfor %>
+    </ul>
+  </div>
+</article>
+{% endblock %}
+
+
+<!--{{ macro.footbar('shopping') }}-->
+{% raw %}
+<script id="goodsTempl" type="text/swig-template">
+  {% for item in list %}
+  <li>
+    <div class="li-wrap">
+      <a href="/shopping/details/{{item.id}}"><img src="{{ item.img }}"></a>
+      <div class="p-title">
+        <dl>
+          <dt><strong><a>{{ item.name }}</a></strong></dt>
+          <dd>人民币：{{item.priceCh}}元</dd>
+          <dd>日<i>&nbsp;</i>元：{{item.price}}円</dd>
+        </dl>
+        <span>已售{{ item.buyCount}}件</span>
+      </div>
+    </div>
+  </li>
+  {% endfor %}
+</script>
+{% endraw %}
+
+{% block footer %}
+<div class="placeholder-bottom"></div>
+<footer class="footer">
+  <p class="b-box" onclick="goHome()"><i class="bx-title bx-title-1"></i><em class="bx-text">商城首页</em></p>
+  <p class="b-box" onclick="goShoppingCart()"><i class="bx-title bx-title-2"></i><em class="bx-text">购物车</em></p>
+  <p class="b-box" onclick="goLogin()"><i class="bx-title bx-title-3"></i><em class="bx-text">个人中心</em></p>
+  <p class="b-box" onclick="goShopList()"><i class="bx-title bx-title-4"></i><em class="bx-text">实体店铺</em></p>
+  <p class="b-box" onclick="goService()"><i class="bx-title bx-title-5"></i><em class="bx-text">联系客服</em></p>
+</footer>
+<div id="go_top" class="go-top" onclick="javascript:scrollTo(0,0);"></div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ '/static/js/shopping.js'|version }}"></script>
+<script>
+  window.onscroll = function(){
+    var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+    var go_top = $G('go_top');
+    if(scroll > 5){
+      go_top.style.display = 'block';
+    } else {
+      go_top.style.display = 'none';
+    }
+  };
+
+
+  function a() {
+    debugger
+//    alert($('input#search-home-search2').val());
+    var content = $('input#search-home-search2').val();
+    if(content == null || content == ''){
+      notice('搜索内容不能为空')
+    }else{
+      location.href = '/shopping/search?content=' + content;
+    }
+
+
+  }
+</script>
+{% endblock %}

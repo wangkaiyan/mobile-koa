@@ -1,0 +1,168 @@
+{% extends './modules/common/templates/main20.html' %}
+{% block style %}
+<script src="{{ '/static/js/jquery.min.js'|version }}"></script>
+<link href="/static/css/base.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/static/js/base.js"></script>
+<link rel="stylesheet" href="{{ '/static/css/me.css'|version }}" type="text/css" />
+
+<script src="/static/dev/js/mobiscroll.core-2.6.2.js" type="text/javascript"></script>
+<script src="/static/dev/js/mobiscroll.core-2.6.2-zh.js" type="text/javascript"></script>
+<link href="/static/dev/css/mobiscroll.core-2.6.2.css" rel="stylesheet" type="text/css" />
+<link href="/static/dev/css/mobiscroll.animation-2.6.2.css" rel="stylesheet" type="text/css" />
+<script src="/static/dev/js/mobiscroll.datetime-2.6.2.js" type="text/javascript"></script>
+<script src="/static/dev/js/mobiscroll.list-2.6.2.js" type="text/javascript"></script>
+<script src="/static/dev/js/mobiscroll.select-2.6.2.js" type="text/javascript"></script>
+<script src="/static/dev/js/mobiscroll.android-2.6.2.js" type="text/javascript"></script>
+<link href="/static/dev/css/mobiscroll.android-2.6.2.css" rel="stylesheet" type="text/css" />
+<script src="/static/dev/js/mobiscroll.android-ics-2.6.2.js" type="text/javascript"></script>
+<link href="/static/dev/css/mobiscroll.android-ics-2.6.2.css" rel="stylesheet" type="text/css" />
+<script src="/static/dev/js/mobiscroll.ios-2.6.2.js" type="text/javascript"></script>
+<link href="/static/dev/css/mobiscroll.ios-2.6.2.css" rel="stylesheet" type="text/css" />
+<script src="/static/dev/js/mobiscroll.jqm-2.6.2.js" type="text/javascript"></script>
+<link href="/static/dev/css/mobiscroll.jqm-2.6.2.css" rel="stylesheet" type="text/css" />
+<link href="/static/dev/css/mobiscroll.sense-ui-2.6.2.css" rel="stylesheet" type="text/css" />
+<script src="/static/dev/js/mobiscroll.wp-2.6.2.js" type="text/javascript"></script>
+<link href="/static/dev/css/mobiscroll.wp-2.6.2.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+
+{% block header %}
+<header class="header">
+    <div class="back-btn" onclick="goBack()"></div>
+    <div class="title-msg">确认订单</div>
+</header>
+
+{% endblock %}
+{% block content %}
+
+
+<article style="overflow-x: hidden; margin-top: 40px; width: 100%; ">
+    {% if error %}
+    <div class="login-msg0">{{ error }}</div>
+    {% endif %}
+    <div class="address-row" style="margin: 5px 5px;">
+        <dl>
+            <dt class="ar-line">收货人：{{ address.userName }}
+                <span>{{ address.phone }}
+                    <a class="arl-pic" href="/shopping/addresses">
+                    <img src="/static/images/right2.png">
+                     </a>
+                </span>
+            </dt>
+            <dd class="ar-line">{{ address.country }}-{{ address.province }}-{{ address.address }}</dd>
+        </dl>
+    </div>
+    <input type="hidden" name="country" id="country" value="{{ address.country }}" />
+    <!--<div id="sel2" style="display: none;">-->
+    {% if address.country ==  '日本'  ||  teamCode != null  %}
+    <div id="sel2" class="address-row" style="margin: 5px 5px;">
+        收货日期：<input class="input-line select-date" id="start_date" type="text">至<input class="input-line select-date2" id="end_date" type="text">
+        <br>*特别注意：请您至少提前72小时下单
+    </div>
+    {% endif %}
+
+    <div>
+        {% for shop in list %}
+
+        <div class="box-1">
+            {{shop.shopName}} <br>
+            <div class="box-1-wrap">
+
+                {% for good in shop.goodInfoBeanList %}
+                <div class="b1w-content">
+                    <dl>
+                        <dt><img src="{{good.img}}"></dt>
+                        <dd>
+                            <ul>
+                                <li>{{good.productName}}</li>
+                                <li>价格：{{good.price}}円&nbsp;&nbsp;数量：{{good.buyNum}}件</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+                {% endfor %}
+
+                <div>给卖家留言：</div>
+                <div><textarea class="ta-textarea"   data-shop="{{ shop.shopId }}" name="userMessage" placeholder="请留言，字数在3-20字以内"></textarea></div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="od-row2">优惠券：<span class="fr1">
+        {% if entity.coupon ==  null  ||  entity.coupon.price == null  %}
+            0日元
+        {% else %}
+            {{entity.coupon.price }}日元
+        {% endif %}
+        <a class="arl-pic" href="/shopping/coupon/{{entity.totalPrice}}">
+        <img src="/static/images/right2.png"></a></span></div>
+    <div class="od-row2">
+
+        {% if teamCode  %}
+        <label>
+            <input class="ck-check" id="teamCodeCk" name="teamCodeCk" type="checkbox" checked="checked" >跟团
+        </label>
+        <span class="or2-s" id="teamCodeDiv"  >团号：
+            <input type="text" class="input-line" id="teamCode" name="teamCode" value="{{ teamCode }}" >
+        </span>
+        {% else %}
+        <label>
+            <input class="ck-check" id="teamCodeCk" name="teamCodeCk" type="checkbox">跟团
+        </label>
+        <span class="or2-s" id="teamCodeDiv" style="display: none" >团号：
+            <input type="text" class="input-line" id="teamCode" name="teamCode" placeholder="请输入团号">
+        </span>
+        {% endif %}
+
+    </div>
+
+    <div class="od-row2">
+        <div class="od-row3">商品价格总计：<span>{{entity.totalPrice}}日元</span></div>
+        <div class="od-row3">邮费总计：<span>{{entity.expressPrice}}日元</span></div>
+        <div class="od-row3">合计：<span>{{entity.totalPrice + entity.expressPrice}}日元</span></div>
+        <div class="od-row3">优惠：<span>{{entity.totalDiscountPrice}}日元</span></div>
+        <div class="od-row4">应付金额：<span>RMB:{{entity.shouldPayCh}}元</span>  <span>{{entity.shouldPay}}円</span>  </div>
+    </div>
+    <div class="od-row1" style="text-align: center; color: red;">请在2小时内完成支付</div>
+    <!--<a class="btn-new" >立即支付< /a>-->
+    {% if error %}
+    {% else %}
+     <button type="button" class="btn-new2" >立即支付</button>
+    {% endif %}
+
+</article>
+
+
+{% endblock %}
+
+{% block footer %}
+
+<div class="placeholder-bottom" style="height: 45px;"></div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ '/static/js/shopping.js'|version }}"></script>
+
+<script type="text/javascript">
+    $(function () {
+        var opt = {date:{preset : 'date', minDate: new Date(2000,3,10,9,22), maxDate: new Date(2099,12,31,15,44)}};
+        $('#start_date')
+                .scroller('destroy')
+                .scroller($.extend(opt['date'],
+                        { theme: 'default', mode: 'scroller',
+                            display: 'bottom', lang: 'zh' ,formatResult: function (d) {
+                            return d[2]+'-'+(parseInt(d[1])+1)+'-'+d[0];
+                        }}));
+        $('#end_date')
+                .scroller('destroy')
+                .scroller($.extend(opt['date'],
+                        { theme: 'default', mode: 'scroller',
+                            display: 'bottom', lang: 'zh' ,formatResult: function (d) {
+                            return d[2]+'-'+(parseInt(d[1])+1)+'-'+d[0];
+                        }}));
+    }); 
+</script>
+{% endblock %}
+
