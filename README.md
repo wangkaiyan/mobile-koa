@@ -1,25 +1,67 @@
-# forum_ly
+# nodejs  koa 项目
 
 
-> 项目进度说明
-* 每周换算 = 3 （1+1+0.5+0.5） 个工作日  （周六 ，周日 ，周一~三，  周四~五）
-* 每周会按照4块时间，分别进行工作安排
-* 周六6点 周日6点 周三10点 周五10点
+A koa scaffold for build web mvc application rapidly with a carefully designed structure.
 
-###### 上线准备
-1. 录入：朋友圈、图书、图书吧数据，
-* 首页数据，贴吧首页
-* 系统新闻（操作入口：主页右上方“发新闻帖子”）
-* 注册用户
-* 验证好友
-* 发私信
-* 发帖，回帖
-* 上传、下载
-* 视频（科室、图书）
-* 搜索
-* 申请建吧
-* 医生认证
-* 申请版主
-* 投诉
-* 首页建议
-* 网站地图
+### Installation
+````
+$ git clone 
+$ npm install
+````
+
+### Quick start
+
+Aha, just input cmd:
+````
+$ node --harmony server.js
+````
+
+I strongly suggest you install [node-supervisor](https://github.com/isaacs/node-supervisor), and input cmd:
+````
+$ supervisor --harmony -w app server.js
+````
+
+### Structure
+The application is composed by modules, every folder in app folder is treated as a module. routes.js in modules is the place for def routers, for example:
+you design pages for your users, you can create a folder named account as a module, and create file routes.js in account for routes,
+now you can def "/account/profile" for user's profile page, "/account/login" and "/account/logout" for user login and logout and so on...
+
+
+### Routes
+In app.js, all routes.js (all routes should be defined in) is autowired recursive, it means you just write your routes,
+dont need care require in app.js, but it's no order and all routes.js is autowired, if you not want to that, change it youself in app.js.
+
+
+### Static files
+koa-scaffold support serve static files by use [koa-static-cache](https://github.com/koajs/static-cache) for rapidly develop, 
+you can change serve folder and static prefix in app/common/config.js, But I strongly suggest you should has a single static project and serve it use a web service such as nginx.
+
+
+### Templates
+I use [swig](https://github.com/paularmstrong/swig) as template enegin
+
+### ORM and Database
+````
+TODO
+````
+
+### Form and validation
+````
+TODO
+````
+
+### memcache or redis
+````
+TODO
+````
+
+
+### Test
+````
+TODO
+````
+
+### and so on...
+````
+TODO
+````
